@@ -585,9 +585,8 @@
       const isOpen = btn.getAttribute('aria-expanded') === 'true';
       const answer = btn.nextElementSibling;
 
-      // Close all others in same group
-      const group = btn.closest('.faq-group');
-      group.querySelectorAll('.faq-question[aria-expanded="true"]').forEach(other => {
+      // Close all others
+      document.querySelectorAll('.faq-question[aria-expanded="true"]').forEach(other => {
         if (other !== btn) {
           other.setAttribute('aria-expanded', 'false');
           other.nextElementSibling.style.maxHeight = null;
