@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ – Dax Yoga Therapy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brown:      #474747;
+      --brown-mid:  #474747;
+      --terracotta: #474747;
+      --cream:      #f5f0e8;
+      --cream-dark: #ede5d4;
+      --green:      #2d4a32;
+      --text:       #474747;
+      --muted:      #474747;
+      --border:     rgba(59,42,26,0.15);
+      --btn-border: #CCCCCC;
+      --btn-hover:  #1CCBD6;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 300;
+      background: transparent;
+      color: var(--text);
+      padding: 0;
+      margin: 0;
+    }
+
+    /* ── Section title ── */
+    .faq-title {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 1.45rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--brown);
+      margin-bottom: 36px;
+    }
+
+    /* ── Category group ── */
+    .faq-group {
+      margin-bottom: 48px;
+    }
+
+    .faq-group-title {
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #474747;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── Accordion item ── */
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq-question {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 0;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.4;
+      color: var(--brown);
+      transition: color 0.2s;
+    }
+
+    .faq-question:hover { color: var(--terracotta); }
+    .faq-question[aria-expanded="true"] { color: var(--terracotta); }
+
+    .faq-icon {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      position: relative;
+      color: var(--terracotta);
+    }
+
+    .faq-icon::before,
+    .faq-icon::after {
+      content: '';
+      position: absolute;
+      background: currentColor;
+      border-radius: 1px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .faq-icon::before {
+      width: 14px; height: 1.5px;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .faq-icon::after {
+      width: 1.5px; height: 14px;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .faq-question[aria-expanded="true"] .faq-icon::after {
+      transform: translate(-50%, -50%) rotate(90deg);
+      opacity: 0;
+    }
+
+    /* ── Answer panel ── */
+    .faq-answer {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.35s ease;
+    }
+
+    .faq-answer-inner {
+      padding: 0 0 24px 0;
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 300;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--text);
+    }
+
+    .faq-answer-inner p { margin-bottom: 14px; }
+    .faq-answer-inner p:last-child { margin-bottom: 0; }
+
+    .faq-answer-inner strong {
+      font-weight: 600;
+      color: var(--brown);
+    }
+
+    .faq-answer-inner em {
+      font-style: italic;
+    }
+
+    .faq-answer-inner ul,
+    .faq-answer-inner ol {
+      padding-left: 20px;
+      margin-bottom: 14px;
+    }
+
+    .faq-answer-inner li { margin-bottom: 6px; }
+
+    .faq-answer-inner a {
+      color: var(--terracotta);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .faq-answer-inner a:hover { color: var(--brown); }
+
+    /* ── CTA buttons at bottom — all outlined ── */
+    .faq-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 44px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+
+    .faq-ctas a {
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 400;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 13px 28px;
+      border-radius: 6px;
+      background: transparent;
+      color: #474747 !important;
+      border: 1px solid var(--btn-border);
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    .faq-ctas a:hover {
+      background: transparent;
+      border-color: var(--btn-hover);
+      color: var(--btn-hover) !important;
+    }
+
+    /* ── Consistent section spacing ── */
+    .faq-group {
+      margin-bottom: 0;
+      padding-bottom: 40px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .faq-question { font-size: 0.95rem; }
+      .faq-title { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════
+     TITLE
+════════════════════════════════════════════ -->
+<h2 class="faq-title">Frequently Asked Questions</h2>
+
+
+<!-- ════════════════════════════════════════════
+     CATEGORY: ABOUT YOGA & CLASS STYLES
+════════════════════════════════════════════ -->
+<section class="faq-group" id="faq-yoga">
+  <p class="faq-group-title">About Yoga</p>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      What is Yoga?
+      <span class="faq-icon" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" role="region">
+      <div class="faq-answer-inner">
+        <p>Yoga is a universal practice rooted in the Veda-s — the ancient scriptures of India. It was first codified by Patañjali in the <em>Yoga Sūtra</em>, a foundational text outlining the philosophy and principles of Yoga. The term "Yoga" has various interpretations, including "to come together," "to unite," and "to tie the strands of the mind together." Despite these different definitions, they all point toward a common goal: achieving inner harmony and personal transformation.</p>
+        <p>One of my favourite definitions of Yoga is <em>"to attain what was previously unattainable."</em> This captures Yoga's potential to help us create the positive changes we seek in our lives.</p>
+        <p>There are no prerequisites for beginning a Yoga practice, and no single prescribed method. Yoga offers multiple paths for personal growth, including Āsana (physical postures), Prāṇāyāma (breath control), Dhāraṇā (meditation), and the study of the Yoga Sūtra-s. Each person can begin their Yoga journey from their own starting point, progressing step by step in a way that honours their unique needs and circumstances.</p>
+        <p>Whether you're looking to improve physical health, manage stress, or enhance emotional well-being, Yoga provides skilful tools to support your path to transformation.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- class styles -->
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      Is Haṭha Yoga right for me?
+      <span class="faq-icon" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" role="region">
+      <div class="faq-answer-inner">
+        <p>Haṭha Yoga emphasizes physical and mental discipline, focusing on stretching and strengthening the body while promoting relaxation and mindfulness. As one of the oldest forms of Yoga — with roots stretching back over 3,000 years — Haṭha Yoga works to balance the subtle energies within the body through an intricate network of energy channels (Nāḍī-s) and energy centres (Cakra-s).</p>
+        <p><strong>Physical benefits include</strong> improved mobility, enhanced muscle tone, better posture, and increased body awareness. <strong>Mental and emotional benefits</strong> include reduced stress, anxiety, and symptoms of depression, along with improved mindfulness and better sleep quality.</p>
+        <p>Haṭha Yoga offers a time-tested approach to building strength, flexibility, and inner calm.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      Is Slow Flow Yoga right for me?
+      <span class="faq-icon" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" role="region">
+      <div class="faq-answer-inner">
+        <p>Slow Flow Yoga allows us to move with intention, unwind stress, and restore balance through gentle yet invigorating movement. This mindful practice combines intentional movement with breath work to reduce stress, boost your immune system, and support healthy digestion. It's perfect for cultivating mindfulness, self-awareness, and mental clarity.</p>
+        <p>Slow Flow activates the parasympathetic nervous system, helping to lower stress hormones, promote relaxation, and deepen self-awareness. The deliberate pace enhances flexibility, strength, and mobility through deeper muscle engagement and controlled movement.</p>
+        <p><strong>This class is ideal if you are:</strong></p>
+        <ul>
+          <li>Recovering from injury</li>
+          <li>Seeking a gentle yet transformative practice</li>
+          <li>Looking to balance an active lifestyle with restorative movement</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      Is Yin Yoga right for me?
+      <span class="faq-icon" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" role="region">
+      <div class="faq-answer-inner">
+        <p>Yin Yoga invites you to slow down, unwind, and reconnect with your body and breath. This practice involves holding postures for longer periods, allowing you to explore sensations, deepen self-awareness, and tune into your body's wisdom.</p>
+        <p>Yin Yoga targets deep connective tissues, joints, and bones, enhancing flexibility and helping release blocked energy. It promotes mental clarity and emotional balance, making it a meditative practice that supports emotional healing and stress relief.</p>
+        <p><strong>This class is ideal if you are:</strong></p>
+        <ul>
+          <li>Recovering from burnout</li>
+          <li>Seeking deep relaxation</li>
+          <li>Looking to balance a fast-paced lifestyle</li>
+          <li>Interested in meditative movement</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      Is Restorative Yoga right for me?
+      <span class="faq-icon" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" role="region">
+      <div class="faq-answer-inner">
+        <p>Restorative Yoga offers an opportunity to unwind and release accumulated stress while bringing deep relaxation to your body, breath, and mind. Each session begins with gentle movement, followed by breath work, visualization, and guided relaxation. Set in a serene atmosphere with candles, dim lighting, supportive props, and blankets, this class offers a soothing and deeply healing experience.</p>
+        <p>Restorative Yoga supports flexibility, balance, and muscle recovery while calming the nervous system. By activating the parasympathetic response, it reduces stress, improves sleep quality, and enhances cognitive function.</p>
+        <p><strong>This gentle yet powerful practice is ideal if you are:</strong></p>
+        <ul>
+          <li>Recovering from injury</li>
+          <li>Managing chronic pain</li>
+          <li>Seeking deep relaxation and nervous system regulation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     CATEGORY: YOGA THERAPY
+════════════════════════════════════════════ -->
+<section class="faq-group" id="faq-therapy">
+  <p class="faq-group-title">Yoga Therapy</p>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      What is Yoga Therapy?
+      <span class="faq-icon" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" role="region">
+      <div class="faq-answer-inner">
+        <p>Yoga Therapy is a self-empowering process that invites individuals to take an active role in their healing journey. It's the skilful application of Yoga tools — movement, breath work, meditation, and more — adapted to address each person's unique needs. Safe, supportive, and highly personalized, Yoga Therapy offers an evolving practice tailored to your physical, mental, and emotional well-being.</p>
+        <p>This holistic approach recognizes that while symptoms may appear in a specific location, they affect your whole system. By addressing health concerns in a multi-dimensional way, Yoga Therapy focuses on progressively alleviating suffering through non-invasive, complementary treatment. Depending on the nature of the issue, it may act as a preventative measure, support recovery, or provide effective tools to manage chronic conditions.</p>
+        <p>Healing in Yoga Therapy is a collaborative process between teacher and student. Together, we work to relieve symptoms that cause suffering and build resilience, gradually moving you toward greater health and vitality. Drawing on the sister science of Āyurveda, Yoga Therapists may also suggest supportive diet and lifestyle modifications when appropriate.</p>
+        <p>A growing body of research supports its efficacy as a complementary healing modality. If you're interested in further reading, please see a small research archive <a href="https://yogatherapy.health/research/" target="_blank" rel="noopener">here</a>.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      How is Yoga Therapy different from Yoga classes?
+      <span class="faq-icon" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" role="region">
+      <div class="faq-answer-inner">
+        <p>Yoga classes — even therapeutic ones — are designed for groups and cannot address your specific condition with the precision needed for lasting results.</p>
+        <p><strong>Yoga classes provide:</strong> General sequences, group instruction, standardized progressions.<br>
+        <strong>Yoga Therapy provides:</strong> Personalized assessment, custom protocols designed for your exact condition, progressive adaptation based on your response, root cause resolution, clinical outcome measurement.</p>
+        <p>Think of it this way: if you had a knee injury, would you join a generic group class or work one-on-one with a therapist who designs a custom rehabilitation plan just for you?</p>
+        <p>Yoga Therapy is clinical intervention, not general wellness. The results reflect that distinction.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      What are the benefits of Yoga Therapy?
+      <span class="faq-icon" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" role="region">
+      <div class="faq-answer-inner">
+        <p>Yoga Therapy works on multiple dimensions simultaneously — physical, physiological, and emotional. Regular therapeutic practice supports:</p>
+        <ul>
+          <li>Increased strength and flexibility</li>
+          <li>Reduction in pain and fatigue</li>
+          <li>Improved circulation and breath capacity</li>
+          <li>Decreased blood pressure and lowered risk of heart disease</li>
+          <li>Enhanced sleep quality and digestion</li>
+          <li>Improved mood and greater peace of mind</li>
+          <li>Reduced stress and anxiety</li>
+          <li>Increased self-discipline and resilience</li>
+        </ul>
+        <p>Whether you're seeking relief from a specific condition or looking to improve your overall quality of life, these benefits compound over time as your practice develops.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      Will this work for my specific condition?
+      <span class="faq-icon" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" role="region">
+      <div class="faq-answer-inner">
+        <p><strong>I work with:</strong></p>
+        <ul>
+          <li><strong>Chronic pain:</strong> Fibromyalgia, sciatica, arthritis, chronic back/neck pain, joint pain</li>
+          <li><strong>Post-injury recovery:</strong> Rotator cuff, knee injuries, hip dysfunction, post-surgical rehabilitation</li>
+          <li><strong>Women's health:</strong> Perimenopause/menopause symptoms, pelvic pain, endometriosis, hormonal imbalances</li>
+          <li><strong>Stress-related conditions:</strong> IBS, digestive disorders, insomnia, anxiety, PTSD</li>
+        </ul>
+        <p><strong>If you have:</strong></p>
+        <ul>
+          <li>Acute injuries requiring immediate medical intervention → See a physician first</li>
+          <li>Conditions requiring surgical intervention → We can work together post-surgery</li>
+          <li>Severe mental health conditions → Yoga Therapy is complementary, not primary treatment</li>
+        </ul>
+        <p>During your Discovery Call, we'll discuss your specific situation and I'll tell you honestly whether yoga therapy is appropriate and what results you can realistically expect.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      How Can My Training Support Your Specific Needs?
+      <span class="faq-icon" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" role="region">
+      <div class="faq-answer-inner">
+        <p>My training and education have equipped me to support a wide range of physical, emotional, and mental challenges. Whether you're dealing with chronic pain conditions like fibromyalgia, sciatica, or arthritis, or managing stress, anxiety, depression, or PTSD, I'm here to support you.</p>
+        <p><strong>I also provide personalized care for those experiencing:</strong></p>
+        <ul>
+          <li>Fatigue and sleep disturbances like insomnia</li>
+          <li>Hormonal shifts and life transitions, including menopause support</li>
+          <li>Digestive and metabolic concerns like IBS and thyroid imbalances</li>
+          <li>Reproductive health issues such as endometriosis</li>
+        </ul>
+        <p>My approach is integrative, considering your whole self — body, mind, and emotions. My goal is to create a safe and nurturing space where you can move toward better health through personalized Yoga Therapy in Toronto.</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     CATEGORY: RESULTS & PROCESS
+════════════════════════════════════════════ -->
+<section class="faq-group" id="faq-results">
+  <p class="faq-group-title">Results &amp; Process</p>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      How quickly will I see results?
+      <span class="faq-icon" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" role="region">
+      <div class="faq-answer-inner">
+        <p><em>Honest answer: it depends entirely on your condition, commitment, and individual response.</em></p>
+        <p>Some clients notice improvement within 2–3 weeks — better sleep, reduced anxiety, subtle shifts in pain patterns. Others take 6–8 weeks before seeing significant change, especially with complex chronic conditions.</p>
+        <p><strong>What affects your timeline:</strong></p>
+        <ul>
+          <li><strong>Condition complexity</strong> — Acute issues often respond faster than chronic, multi-layered dysfunction</li>
+          <li><strong>Home practice consistency</strong> — Daily practice produces different results than sporadic practice</li>
+          <li><strong>Your body's current capacity</strong> — Severely deconditioned bodies need more time to rebuild</li>
+          <li><strong>Lifestyle factors</strong> — Sleep quality, stress levels, and daily movement habits all impact healing</li>
+          <li><strong>Readiness for change</strong> — Sometimes people want to feel better but aren't ready to change habits contributing to the problem</li>
+        </ul>
+        <p><strong>What I can promise:</strong></p>
+        <ul>
+          <li>Clear communication about what I'm seeing and whether we're making progress</li>
+          <li>Honest assessment if your pace is slower than expected and why</li>
+          <li>Continuous refinement of your protocol based on your response</li>
+          <li>Recommendation to seek additional support if something outside my scope is blocking progress</li>
+        </ul>
+        <p><strong>What I cannot promise:</strong> specific timelines or percentage improvements; that you'll be pain-free (some conditions require management, not elimination); or that Yoga Therapy alone will solve complex, multi-factorial health issues.</p>
+        <p>The goal is continuous progress toward your objectives — not meeting arbitrary timelines.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      What if I've tried yoga before and it didn't help?
+      <span class="faq-icon" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" role="region">
+      <div class="faq-answer-inner">
+        <p>Generic yoga classes aren't designed to address clinical conditions. If you've tried yoga and didn't experience meaningful improvement, it likely means:</p>
+        <ol>
+          <li><strong>The practice wasn't personalized to your condition</strong> — Group classes can't address your specific dysfunction</li>
+          <li><strong>You were given sequences that aggravated your condition</strong> — Not all yoga poses are appropriate for all conditions</li>
+          <li><strong>There was no progressive therapeutic protocol</strong> — Random classes don't build systematically toward healing</li>
+          <li><strong>Root causes weren't addressed</strong> — Stretching tight muscles doesn't resolve why they're tight in the first place</li>
+        </ol>
+        <p>Yoga Therapy is fundamentally different. We identify exactly what's creating your pain and design practices that resolve it systematically. If your previous yoga experience didn't work, that's precisely why you need specialized yoga therapy.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      Do I need to be flexible or have yoga experience?
+      <span class="faq-icon" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" role="region">
+      <div class="faq-answer-inner">
+        <p>Absolutely not. In fact, many of my most successful clients had never done yoga before starting therapy.</p>
+        <p><strong>Yoga Therapy meets you exactly where you are.</strong> If you can't touch your toes, can barely get on the floor, or have significant movement limitations — that's precisely why personalized therapy is necessary.</p>
+        <p>I design practices around your current capacity and we progress gradually. You'll never be asked to do something your body isn't ready for.</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     CATEGORY: INVESTMENT
+════════════════════════════════════════════ -->
+<section class="faq-group" id="faq-investment">
+  <p class="faq-group-title">Investment</p>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      How much does it cost?
+      <span class="faq-icon" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" role="region">
+      <div class="faq-answer-inner">
+        <p><strong>Initial Assessment:</strong> $130 (90 minutes)<br>
+        Comprehensive evaluation and personalized treatment planning.</p>
+        <p><strong>Individual Sessions:</strong> $110 (60 minutes)<br>
+        Ongoing therapeutic sessions with protocol refinement.</p>
+        <p><strong>Foundations Program:</strong> $330 (3 sessions)<br>
+        Assessment + 2 follow-up sessions. Good for acute issues or trying yoga therapy before a longer commitment. New clients only.</p>
+        <p>I'll give you an honest recommendation after your initial assessment about what I believe your situation requires. You're never locked into a package — we work session by session, and you decide when you've achieved your goals or are ready to practice independently.</p>
+        <p><strong>Group Classes:</strong> Vary by studio pricing at Nest Yoga + Massage.</p>
+        <p>Many clients spend thousands annually on pain medication, massage, physiotherapy, and other interventions that provide temporary relief. Therapeutic yoga addresses root causes — meaning you invest for a defined period to develop sustainable tools, rather than depending on external interventions indefinitely.</p>
+        <p>That said, this is still a real financial commitment. If cost is a significant barrier, the Foundations Program or group classes may be a more accessible starting point.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      Is Yoga Therapy covered by insurance?
+      <span class="faq-icon" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" role="region">
+      <div class="faq-answer-inner">
+        <p>Many extended health insurance plans in Canada cover Yoga Therapy under complementary or alternative medicine.</p>
+        <p><strong>Check your policy for:</strong></p>
+        <ul>
+          <li>Complementary medicine coverage</li>
+          <li>Specific "yoga therapy" or "therapeutic yoga" listings</li>
+          <li>Annual limits for alternative health practitioners</li>
+        </ul>
+        <p><strong>Important note:</strong> Coverage varies widely by insurer and province. Plans offered through employers or unions may differ significantly from individual plans. Always confirm with your insurer directly.</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     CATEGORY: ĀYURVEDA
+════════════════════════════════════════════ -->
+<section class="faq-group" id="faq-ayurveda">
+  <p class="faq-group-title">Āyurveda</p>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      What is Āyurveda?
+      <span class="faq-icon" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" role="region">
+      <div class="faq-answer-inner">
+        <p>Āyurveda is an ancient holistic healing system that originated in India over 5,000 years ago. The word Āyurveda comes from Sanskrit: "Āyur" meaning life, and "Veda" meaning knowledge — translating to "the science of life." This time-tested system views health as a balance between body, mind, and spirit, recognizing that each person requires individualized care based on their unique constitution, lifestyle, and environment.</p>
+        <p><strong>The Three Doṣa:</strong> Āyurveda identifies three fundamental energies that govern bodily functions:</p>
+        <ul>
+          <li><strong>Vāta Doṣa</strong> (Air and Space): governs movement, circulation, and breathing</li>
+          <li><strong>Pitta Doṣa</strong> (Fire and Water): governs digestion, metabolism, and transformation</li>
+          <li><strong>Kapha Doṣa</strong> (Earth and Water): governs structure, stability, and lubrication</li>
+        </ul>
+        <p>Each person has a unique combination of these Doṣa. When they fall out of balance, health challenges can arise. To discover your unique Doṣa (Prakṛti — your innate constitution, or Vikṛti — your current imbalance), you can take a short quiz <a href="#dosha-quiz">here</a>.</p>
+        <p><strong>The Sister Science to Yoga:</strong> Āyurveda developed alongside Yoga in ancient India and they complement each other beautifully. While Yoga focuses on spiritual growth and mental practices, Āyurveda addresses physical health and lifestyle. Together, they form a comprehensive system for holistic well-being.</p>
+        <p>In my Yoga Therapy practice, I draw on Āyurvedic principles when appropriate, offering lifestyle and dietary recommendations to support your healing journey. Want to learn more? <a href="https://chipper-composer-7760.kit.com/profile/posts" target="_blank" rel="noopener">Read my blog posts about Āyurveda</a>.</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     BOTTOM CTAs
+════════════════════════════════════════════ -->
+<div class="faq-ctas">
+  <a href="#testimonials">Read Client Stories</a>
+  <a href="#idealclient">Is This Right For Me?</a>
+  <a href="https://nestymt.janeapp.com/#/staff_member/106/treatment/121" target="_blank" rel="noopener">Book a Discovery Call →</a>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════ -->
+<script>
+  // ── Accordion logic ──
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+      const answer = btn.nextElementSibling;
+
+      // Close all others in same group
+      const group = btn.closest('.faq-group');
+      group.querySelectorAll('.faq-question[aria-expanded="true"]').forEach(other => {
+        if (other !== btn) {
+          other.setAttribute('aria-expanded', 'false');
+          other.nextElementSibling.style.maxHeight = null;
+        }
+      });
+
+      // Toggle this one
+      if (isOpen) {
+        btn.setAttribute('aria-expanded', 'false');
+        answer.style.maxHeight = null;
+      } else {
+        btn.setAttribute('aria-expanded', 'true');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // ── Notify parent of height for iframe resizing ──
+  function postHeight() {
+    window.parent.postMessage({ iframeHeight: document.body.scrollHeight }, '*');
+  }
+  const ro = new ResizeObserver(postHeight);
+  ro.observe(document.body);
+  postHeight();
+</script>
+
+</body>
+</html>
