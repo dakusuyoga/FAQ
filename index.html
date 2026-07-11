@@ -1,608 +1,606 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ – Dax Yoga Therapy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brown:      #474747;
+      --brown-mid:  #474747;
+      --terracotta: #474747;
+      --cream:      #f5f0e8;
+      --cream-dark: #ede5d4;
+      --green:      #2d4a32;
+      --text:       #474747;
+      --muted:      #474747;
+      --border:     rgba(59,42,26,0.15);
+      --btn-border: #CCCCCC;
+      --btn-hover:  #1CCBD6;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 300;
+      background: transparent;
+      color: var(--text);
+      padding: 0;
+      margin: 0;
+    }
+
+    /* ── Section title ── */
+    .faq-title {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 1.45rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--brown);
+      margin-bottom: 36px;
+    }
+
+    /* ── Category group ── */
+    .faq-group {
+      margin-bottom: 48px;
+    }
+
+    .faq-group-title {
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #474747;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── Accordion item ── */
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq-question {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 0;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.4;
+      color: var(--brown);
+      transition: color 0.2s;
+    }
+
+    .faq-question:hover { color: var(--terracotta); }
+    .faq-question[aria-expanded="true"] { color: var(--terracotta); }
+
+    .faq-icon {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      position: relative;
+      color: var(--terracotta);
+    }
+
+    .faq-icon::before,
+    .faq-icon::after {
+      content: '';
+      position: absolute;
+      background: currentColor;
+      border-radius: 1px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .faq-icon::before {
+      width: 14px; height: 1.5px;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .faq-icon::after {
+      width: 1.5px; height: 14px;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .faq-question[aria-expanded="true"] .faq-icon::after {
+      transform: translate(-50%, -50%) rotate(90deg);
+      opacity: 0;
+    }
+
+    /* ── Answer panel ── */
+    .faq-answer {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.35s ease;
+    }
+
+    .faq-answer-inner {
+      padding: 0 0 24px 0;
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 300;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--text);
+    }
+
+    .faq-answer-inner p { margin-bottom: 14px; }
+    .faq-answer-inner p:last-child { margin-bottom: 0; }
+
+    .faq-answer-inner strong {
+      font-weight: 600;
+      color: var(--brown);
+    }
+
+    .faq-answer-inner em {
+      font-style: italic;
+    }
+
+    .faq-answer-inner ul,
+    .faq-answer-inner ol {
+      padding-left: 20px;
+      margin-bottom: 14px;
+    }
+
+    .faq-answer-inner li { margin-bottom: 6px; }
+
+    .faq-answer-inner a {
+      color: var(--terracotta);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .faq-answer-inner a:hover { color: var(--brown); }
+
+    /* ── CTA buttons at bottom — all outlined ── */
+    .faq-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 44px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+
+    .faq-ctas a {
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 400;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 13px 28px;
+      border-radius: 6px;
+      background: transparent;
+      color: #474747 !important;
+      border: 1px solid var(--btn-border);
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    .faq-ctas a:hover {
+      background: transparent;
+      border-color: var(--btn-hover);
+      color: var(--btn-hover) !important;
+    }
+
+    /* ── Consistent section spacing ── */
+    .faq-group {
+      margin-bottom: 0;
+      padding-bottom: 40px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .faq-question { font-size: 0.95rem; }
+      .faq-title { font-size: 1.2rem; }
+    }
+  </style>
 </head>
 <body>
-<x-dc>
-<helmet>
-<title>Doṣa Quiz | Discover Your Āyurvedic Constitution</title>
-<meta name="description" content="A short quiz exploring your Āyurvedic constitution — Vāta, Pitta, or Kapha — and what it suggests about your body's daily rhythms and needs.">
-<meta property="og:site_name" content="Dax Yoga Therapy">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="en_CA">
-<meta property="og:title" content="Doṣa Quiz | Discover Your Āyurvedic Constitution">
-<meta property="og:description" content="A short quiz exploring your Āyurvedic constitution — Vāta, Pitta, or Kapha — and what it suggests about your body's daily rhythms and needs.">
-<meta property="og:image" content="assets/dax-vorona-yoga-therapy-toronto.jpg">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&amp;family=Raleway:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&amp;family=Noto+Serif:ital,wght@0,400;0,500;1,400&amp;family=Noto+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
-<style>
-  html { scroll-behavior: smooth; }
-  body { margin: 0; background: #F7F3EC; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
-  a { color: #33523E; }
-  a:hover { color: #1CCBD6; }
-  ::selection { background: #33523E; color: #F7F3EC; }
-  details.full-desc > summary { list-style: none; }
-  details.full-desc > summary::-webkit-details-marker { display: none; }
-  details.full-desc > summary::after { content: '＋'; margin-left: auto; font-weight: 400; color: #C0674B; }
-  details.full-desc[open] > summary::after { content: '－'; }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-</style>
-</helmet>
-<div style="background:#F7F3EC; min-height:100vh">
-  <dc-import name="SiteNav" hint-size="100%,64px" style="position:sticky; top:0; z-index:60"></dc-import>
 
-  <div style="max-width:800px; margin:0 auto; padding:56px 28px 90px">
+<!-- ════════════════════════════════════════════
+     TITLE
+════════════════════════════════════════════ -->
+<h2 class="faq-title">Frequently Asked Questions</h2>
 
-    <section data-screen-label="Doṣa Quiz — Header" style="text-align:center; margin-bottom:48px; padding-bottom:38px; border-bottom:1px solid rgba(122,92,68,0.2)">
-      <p style="margin:0 0 18px; font-family:'Raleway','Noto Sans',sans-serif; font-size:11.5px; font-weight:700; letter-spacing:0.24em; color:#7A5C44">DOṢA QUIZ</p>
-      <h1 style="margin:0 0 20px; font-family:'Cormorant Garamond','Noto Serif',serif; font-weight:500; font-size:clamp(35px, 5.4vw, 54px); line-height:1.08; letter-spacing:-0.01em; color:#33523E">Discover Your<br><em style="font-style:italic; font-weight:500; color:#C0674B">Āyurvedic Constitution</em></h1>
-      <div aria-hidden="true" style="display:flex; align-items:center; justify-content:center; gap:14px; margin:20px 0">
-        <span style="display:block; width:54px; height:1px; background:rgba(122,92,68,0.2)"></span>
-        <span style="color:#C0674B; font-size:14px">✦</span>
-        <span style="display:block; width:54px; height:1px; background:rgba(122,92,68,0.2)"></span>
+
+<!-- ════════════════════════════════════════════
+     CATEGORY: ABOUT YOGA
+════════════════════════════════════════════ -->
+<section class="faq-group" id="faq-yoga">
+  <p class="faq-group-title">About Yoga</p>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      What is Yoga?
+      <span class="faq-icon" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" role="region">
+      <div class="faq-answer-inner">
+        <p>Yoga is a universal practice rooted in the Veda-s — the ancient scriptures of India. It was first codified by Patañjali in the <em>Yoga Sūtra</em>, a foundational text outlining the philosophy and principles of Yoga. The term "Yoga" has various interpretations, including "to come together," "to unite," and "to tie the strands of the mind together." Despite these different definitions, they all point toward a common goal: achieving inner harmony and personal transformation.</p>
+        <p>One of my favourite definitions of Yoga is <em>"to attain what was previously unattainable."</em> This captures Yoga's potential to help us create the positive changes we seek in our lives.</p>
+        <p>There are no prerequisites for beginning a Yoga practice, and no single prescribed method. Yoga offers multiple paths for personal growth, including Āsana (physical postures), Prāṇāyāma (breath control), Dhāraṇā (meditation), and the study of the Yoga Sūtra-s. Each person can begin their Yoga journey from their own starting point, progressing step by step in a way that honours their unique needs and circumstances.</p>
+        <p>Whether you're looking to improve physical health, manage stress, or enhance emotional well-being, Yoga provides skilful tools to support your path to transformation.</p>
       </div>
-      <p style="margin:0 auto 26px; max-width:620px; text-align:left; font-family:'Raleway','Noto Sans',sans-serif; font-size:15.5px; line-height:1.8; color:#59685D; text-wrap:pretty">For each statement, choose the number that best reflects how true it is for you. Answer as you have been throughout your life — your general, lifelong tendencies (your <em style="color: rgb(122, 92, 68); font-style: italic;">Prakṛti</em>) — rather than how you happen to feel today. Rate all the statements below&nbsp;to reveal your dominant Doṣa.</p>
-      <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin-top:22px">
-        <div style="background:#FBF8F2; border:1px solid rgba(122,92,68,0.2); border-radius:999px; padding:7px 16px; font-family:'Raleway','Noto Sans',sans-serif; font-size:12px; letter-spacing:0.03em; color:#59685D; white-space:nowrap"><strong style="color:#C0674B; font-weight:700">0–1</strong> &nbsp;Doesn't apply</div>
-        <div style="background:#FBF8F2; border:1px solid rgba(122,92,68,0.2); border-radius:999px; padding:7px 16px; font-family:'Raleway','Noto Sans',sans-serif; font-size:12px; letter-spacing:0.03em; color:#59685D; white-space:nowrap"><strong style="color:#C0674B; font-weight:700">2–3</strong> &nbsp;Sometimes applies</div>
-        <div style="background:#FBF8F2; border:1px solid rgba(122,92,68,0.2); border-radius:999px; padding:7px 16px; font-family:'Raleway','Noto Sans',sans-serif; font-size:12px; letter-spacing:0.03em; color:#59685D; white-space:nowrap"><strong style="color:#C0674B; font-weight:700">4–5</strong> &nbsp;Applies most of the time</div>
-      </div>
-    </section>
-
-    <div data-screen-label="Doṣa Quiz — Progress" style="position:sticky; top:74px; z-index:40; background:rgba(247,243,236,0.9); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border:1px solid rgba(122,92,68,0.2); border-radius:999px; padding:11px 22px; margin:0 0 40px; display:flex; align-items:center; gap:16px; box-shadow:0 12px 30px -20px rgba(42,58,46,0.5)">
-      <span style="font-family:'Raleway','Noto Sans',sans-serif; font-size:11px; letter-spacing:0.14em; color:#7B766B; white-space:nowrap; font-weight:600">PROGRESS</span>
-      <div style="flex:1; height:4px; background:#E7DECB; border-radius:2px; overflow:hidden"><div style="{{ progressFillStyle }}"></div></div>
-      <span style="font-family:'Raleway','Noto Sans',sans-serif; font-size:11.5px; color:#7A5C44; white-space:nowrap; font-weight:600">{{ progressCount }}</span>
     </div>
+  </div>
+  </section>
+  
+<!-- ════════════════════════════════════════════
+     CATEGORY: YOGA THERAPY
+════════════════════════════════════════════ -->
+<section class="faq-group" id="faq-therapy">
+  <p class="faq-group-title">Yoga Therapy</p>
 
-    <section data-screen-label="Doṣa Quiz — Vāta" style="margin-bottom:52px">
-      <div style="display:flex; align-items:baseline; gap:16px; margin-bottom:20px; padding-bottom:12px; border-bottom:2px solid rgba(122,92,68,0.2)">
-        <h2 style="margin:0; font-family:'Cormorant Garamond','Noto Serif',serif; font-size:32px; font-weight:500; letter-spacing:0.02em; color:#5F5473">Vāta</h2>
-        <span style="font-family:'Cormorant Garamond','Noto Serif',serif; font-style:italic; font-size:16px; color:#7B766B">Air &amp; Space</span>
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      What is Yoga Therapy?
+      <span class="faq-icon" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" role="region">
+      <div class="faq-answer-inner">
+        <p>Yoga Therapy is a self-empowering process that invites individuals to take an active role in their healing journey. It's the skilful application of Yoga tools — movement, breath work, meditation, and more — adapted to address each person's unique needs. Safe, supportive, and highly personalized, Yoga Therapy offers an evolving practice tailored to your physical, mental, and emotional well-being.</p>
+        <p>This holistic approach recognizes that while symptoms may appear in a specific location, they affect your whole system. By addressing health concerns in a multi-dimensional way, Yoga Therapy focuses on progressively alleviating suffering through non-invasive, complementary treatment. Depending on the nature of the issue, it may act as a preventative measure, support recovery, or provide effective tools to manage chronic conditions.</p>
+        <p>Healing in Yoga Therapy is a collaborative process between teacher and student. Together, we work to relieve symptoms that cause suffering and build resilience, gradually moving you toward greater health and vitality. Drawing on the sister science of Āyurveda, Yoga Therapists may also suggest supportive diet and lifestyle modifications when appropriate.</p>
+        <p>A growing body of research supports its efficacy as a complementary healing modality. If you're interested in further reading, please see a small research archive <a href="https://yogatherapy.health/research/" target="_blank" rel="noopener">here</a>.</p>
       </div>
-      <p style="margin:24px 0 12px; font-family:'Raleway','Noto Sans',sans-serif; font-size:11px; letter-spacing:0.18em; color:#7B766B; font-weight:700">PHYSICAL CHARACTERISTICS</p>
-      <sc-for list="{{ vataPhysical }}" as="q" hint-placeholder-count="10">
-        <div style="display:flex; flex-wrap:wrap; align-items:flex-start; justify-content:space-between; gap:10px 16px; padding:13px 0; border-bottom:1px solid rgba(122,92,68,0.14)">
-          <div style="flex:1 1 300px; min-width:240px; display:flex; align-items:baseline; gap:8px">
-            <span style="font-family:'Raleway','Noto Sans',sans-serif; font-size:11px; color:#7A5C44; font-weight:700; letter-spacing:0.04em; flex-shrink:0">{{ q.num }}</span>
-            <span style="font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.5; text-wrap:pretty">{{ q.text }}</span>
-          </div>
-          <div style="display:flex; gap:5px; align-items:center; flex-shrink:0">
-            <button onClick="{{ q.buttons.0.on }}" aria-pressed="{{ q.buttons.0.pressed }}" style="{{ q.buttons.0.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">0</button>
-            <button onClick="{{ q.buttons.1.on }}" aria-pressed="{{ q.buttons.1.pressed }}" style="{{ q.buttons.1.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">1</button>
-            <button onClick="{{ q.buttons.2.on }}" aria-pressed="{{ q.buttons.2.pressed }}" style="{{ q.buttons.2.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">2</button>
-            <button onClick="{{ q.buttons.3.on }}" aria-pressed="{{ q.buttons.3.pressed }}" style="{{ q.buttons.3.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">3</button>
-            <button onClick="{{ q.buttons.4.on }}" aria-pressed="{{ q.buttons.4.pressed }}" style="{{ q.buttons.4.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">4</button>
-            <button onClick="{{ q.buttons.5.on }}" aria-pressed="{{ q.buttons.5.pressed }}" style="{{ q.buttons.5.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">5</button>
-          </div>
-        </div>
-      </sc-for>
-      <p style="margin:24px 0 12px; font-family:'Raleway','Noto Sans',sans-serif; font-size:11px; letter-spacing:0.18em; color:#7B766B; font-weight:700">PSYCHOLOGICAL CHARACTERISTICS</p>
-      <sc-for list="{{ vataPsych }}" as="q" hint-placeholder-count="10">
-        <div style="display:flex; flex-wrap:wrap; align-items:flex-start; justify-content:space-between; gap:10px 16px; padding:13px 0; border-bottom:1px solid rgba(122,92,68,0.14)">
-          <div style="flex:1 1 300px; min-width:240px; display:flex; align-items:baseline; gap:8px">
-            <span style="font-family:'Raleway','Noto Sans',sans-serif; font-size:11px; color:#7A5C44; font-weight:700; letter-spacing:0.04em; flex-shrink:0">{{ q.num }}</span>
-            <span style="font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.5; text-wrap:pretty">{{ q.text }}</span>
-          </div>
-          <div style="display:flex; gap:5px; align-items:center; flex-shrink:0">
-            <button onClick="{{ q.buttons.0.on }}" aria-pressed="{{ q.buttons.0.pressed }}" style="{{ q.buttons.0.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">0</button>
-            <button onClick="{{ q.buttons.1.on }}" aria-pressed="{{ q.buttons.1.pressed }}" style="{{ q.buttons.1.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">1</button>
-            <button onClick="{{ q.buttons.2.on }}" aria-pressed="{{ q.buttons.2.pressed }}" style="{{ q.buttons.2.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">2</button>
-            <button onClick="{{ q.buttons.3.on }}" aria-pressed="{{ q.buttons.3.pressed }}" style="{{ q.buttons.3.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">3</button>
-            <button onClick="{{ q.buttons.4.on }}" aria-pressed="{{ q.buttons.4.pressed }}" style="{{ q.buttons.4.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">4</button>
-            <button onClick="{{ q.buttons.5.on }}" aria-pressed="{{ q.buttons.5.pressed }}" style="{{ q.buttons.5.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">5</button>
-          </div>
-        </div>
-      </sc-for>
-      <div style="display:flex; align-items:center; gap:12px; margin-top:22px; padding:14px 20px; background:#FBF8F2; border:1px solid rgba(122,92,68,0.2); border-radius:14px; justify-content:space-between">
-        <span style="font-family:'Raleway','Noto Sans',sans-serif; font-size:11.5px; letter-spacing:0.1em; color:#7B766B; font-weight:600; white-space:nowrap">VĀTA SCORE</span>
-        <div style="flex:1; height:5px; background:#E7DECB; border-radius:3px; overflow:hidden; margin:0 6px"><div style="{{ vataBarStyle }}"></div></div>
-        <span style="font-family:'Cormorant Garamond','Noto Serif',serif; font-size:26px; font-weight:500; letter-spacing:0.02em; color:#5F5473">{{ vataTotal }}</span><span style="font-family:'Raleway','Noto Sans',sans-serif; font-size:13px; color:#7B766B">/ 100</span>
-      </div>
-    </section>
-
-    <section data-screen-label="Doṣa Quiz — Pitta" style="margin-bottom:52px">
-      <div style="display:flex; align-items:baseline; gap:16px; margin-bottom:20px; padding-bottom:12px; border-bottom:2px solid rgba(122,92,68,0.2)">
-        <h2 style="margin:0; font-family:'Cormorant Garamond','Noto Serif',serif; font-size:32px; font-weight:500; letter-spacing:0.02em; color:#C0674B">Pitta</h2>
-        <span style="font-family:'Cormorant Garamond','Noto Serif',serif; font-style:italic; font-size:16px; color:#7B766B">Fire &amp; Water</span>
-      </div>
-      <p style="margin:24px 0 12px; font-family:'Raleway','Noto Sans',sans-serif; font-size:11px; letter-spacing:0.18em; color:#7B766B; font-weight:700">PHYSICAL CHARACTERISTICS</p>
-      <sc-for list="{{ pittaPhysical }}" as="q" hint-placeholder-count="10">
-        <div style="display:flex; flex-wrap:wrap; align-items:flex-start; justify-content:space-between; gap:10px 16px; padding:13px 0; border-bottom:1px solid rgba(122,92,68,0.14)">
-          <div style="flex:1 1 300px; min-width:240px; display:flex; align-items:baseline; gap:8px">
-            <span style="font-family:'Raleway','Noto Sans',sans-serif; font-size:11px; color:#7A5C44; font-weight:700; letter-spacing:0.04em; flex-shrink:0">{{ q.num }}</span>
-            <span style="font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.5; text-wrap:pretty">{{ q.text }}</span>
-          </div>
-          <div style="display:flex; gap:5px; align-items:center; flex-shrink:0">
-            <button onClick="{{ q.buttons.0.on }}" aria-pressed="{{ q.buttons.0.pressed }}" style="{{ q.buttons.0.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">0</button>
-            <button onClick="{{ q.buttons.1.on }}" aria-pressed="{{ q.buttons.1.pressed }}" style="{{ q.buttons.1.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">1</button>
-            <button onClick="{{ q.buttons.2.on }}" aria-pressed="{{ q.buttons.2.pressed }}" style="{{ q.buttons.2.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">2</button>
-            <button onClick="{{ q.buttons.3.on }}" aria-pressed="{{ q.buttons.3.pressed }}" style="{{ q.buttons.3.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">3</button>
-            <button onClick="{{ q.buttons.4.on }}" aria-pressed="{{ q.buttons.4.pressed }}" style="{{ q.buttons.4.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">4</button>
-            <button onClick="{{ q.buttons.5.on }}" aria-pressed="{{ q.buttons.5.pressed }}" style="{{ q.buttons.5.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">5</button>
-          </div>
-        </div>
-      </sc-for>
-      <p style="margin:24px 0 12px; font-family:'Raleway','Noto Sans',sans-serif; font-size:11px; letter-spacing:0.18em; color:#7B766B; font-weight:700">PSYCHOLOGICAL CHARACTERISTICS</p>
-      <sc-for list="{{ pittaPsych }}" as="q" hint-placeholder-count="10">
-        <div style="display:flex; flex-wrap:wrap; align-items:flex-start; justify-content:space-between; gap:10px 16px; padding:13px 0; border-bottom:1px solid rgba(122,92,68,0.14)">
-          <div style="flex:1 1 300px; min-width:240px; display:flex; align-items:baseline; gap:8px">
-            <span style="font-family:'Raleway','Noto Sans',sans-serif; font-size:11px; color:#7A5C44; font-weight:700; letter-spacing:0.04em; flex-shrink:0">{{ q.num }}</span>
-            <span style="font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.5; text-wrap:pretty">{{ q.text }}</span>
-          </div>
-          <div style="display:flex; gap:5px; align-items:center; flex-shrink:0">
-            <button onClick="{{ q.buttons.0.on }}" aria-pressed="{{ q.buttons.0.pressed }}" style="{{ q.buttons.0.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">0</button>
-            <button onClick="{{ q.buttons.1.on }}" aria-pressed="{{ q.buttons.1.pressed }}" style="{{ q.buttons.1.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">1</button>
-            <button onClick="{{ q.buttons.2.on }}" aria-pressed="{{ q.buttons.2.pressed }}" style="{{ q.buttons.2.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">2</button>
-            <button onClick="{{ q.buttons.3.on }}" aria-pressed="{{ q.buttons.3.pressed }}" style="{{ q.buttons.3.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">3</button>
-            <button onClick="{{ q.buttons.4.on }}" aria-pressed="{{ q.buttons.4.pressed }}" style="{{ q.buttons.4.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">4</button>
-            <button onClick="{{ q.buttons.5.on }}" aria-pressed="{{ q.buttons.5.pressed }}" style="{{ q.buttons.5.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">5</button>
-          </div>
-        </div>
-      </sc-for>
-      <div style="display:flex; align-items:center; gap:12px; margin-top:22px; padding:14px 20px; background:#FBF8F2; border:1px solid rgba(122,92,68,0.2); border-radius:14px; justify-content:space-between">
-        <span style="font-family:'Raleway','Noto Sans',sans-serif; font-size:11.5px; letter-spacing:0.1em; color:#7B766B; font-weight:600; white-space:nowrap">PITTA SCORE</span>
-        <div style="flex:1; height:5px; background:#E7DECB; border-radius:3px; overflow:hidden; margin:0 6px"><div style="{{ pittaBarStyle }}"></div></div>
-        <span style="font-family:'Cormorant Garamond','Noto Serif',serif; font-size:26px; font-weight:500; letter-spacing:0.02em; color:#C0674B">{{ pittaTotal }}</span><span style="font-family:'Raleway','Noto Sans',sans-serif; font-size:13px; color:#7B766B">/ 100</span>
-      </div>
-    </section>
-
-    <section data-screen-label="Doṣa Quiz — Kapha" style="margin-bottom:52px">
-      <div style="display:flex; align-items:baseline; gap:16px; margin-bottom:20px; padding-bottom:12px; border-bottom:2px solid rgba(122,92,68,0.2)">
-        <h2 style="margin:0; font-family:'Cormorant Garamond','Noto Serif',serif; font-size:32px; font-weight:500; letter-spacing:0.02em; color:#33523E">Kapha</h2>
-        <span style="font-family:'Cormorant Garamond','Noto Serif',serif; font-style:italic; font-size:16px; color:#7B766B">Earth &amp; Water</span>
-      </div>
-      <p style="margin:24px 0 12px; font-family:'Raleway','Noto Sans',sans-serif; font-size:11px; letter-spacing:0.18em; color:#7B766B; font-weight:700">PHYSICAL CHARACTERISTICS</p>
-      <sc-for list="{{ kaphaPhysical }}" as="q" hint-placeholder-count="10">
-        <div style="display:flex; flex-wrap:wrap; align-items:flex-start; justify-content:space-between; gap:10px 16px; padding:13px 0; border-bottom:1px solid rgba(122,92,68,0.14)">
-          <div style="flex:1 1 300px; min-width:240px; display:flex; align-items:baseline; gap:8px">
-            <span style="font-family:'Raleway','Noto Sans',sans-serif; font-size:11px; color:#7A5C44; font-weight:700; letter-spacing:0.04em; flex-shrink:0">{{ q.num }}</span>
-            <span style="font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.5; text-wrap:pretty">{{ q.text }}</span>
-          </div>
-          <div style="display:flex; gap:5px; align-items:center; flex-shrink:0">
-            <button onClick="{{ q.buttons.0.on }}" aria-pressed="{{ q.buttons.0.pressed }}" style="{{ q.buttons.0.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">0</button>
-            <button onClick="{{ q.buttons.1.on }}" aria-pressed="{{ q.buttons.1.pressed }}" style="{{ q.buttons.1.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">1</button>
-            <button onClick="{{ q.buttons.2.on }}" aria-pressed="{{ q.buttons.2.pressed }}" style="{{ q.buttons.2.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">2</button>
-            <button onClick="{{ q.buttons.3.on }}" aria-pressed="{{ q.buttons.3.pressed }}" style="{{ q.buttons.3.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">3</button>
-            <button onClick="{{ q.buttons.4.on }}" aria-pressed="{{ q.buttons.4.pressed }}" style="{{ q.buttons.4.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">4</button>
-            <button onClick="{{ q.buttons.5.on }}" aria-pressed="{{ q.buttons.5.pressed }}" style="{{ q.buttons.5.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">5</button>
-          </div>
-        </div>
-      </sc-for>
-      <p style="margin:24px 0 12px; font-family:'Raleway','Noto Sans',sans-serif; font-size:11px; letter-spacing:0.18em; color:#7B766B; font-weight:700">PSYCHOLOGICAL CHARACTERISTICS</p>
-      <sc-for list="{{ kaphaPsych }}" as="q" hint-placeholder-count="10">
-        <div style="display:flex; flex-wrap:wrap; align-items:flex-start; justify-content:space-between; gap:10px 16px; padding:13px 0; border-bottom:1px solid rgba(122,92,68,0.14)">
-          <div style="flex:1 1 300px; min-width:240px; display:flex; align-items:baseline; gap:8px">
-            <span style="font-family:'Raleway','Noto Sans',sans-serif; font-size:11px; color:#7A5C44; font-weight:700; letter-spacing:0.04em; flex-shrink:0">{{ q.num }}</span>
-            <span style="font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.5; text-wrap:pretty">{{ q.text }}</span>
-          </div>
-          <div style="display:flex; gap:5px; align-items:center; flex-shrink:0">
-            <button onClick="{{ q.buttons.0.on }}" aria-pressed="{{ q.buttons.0.pressed }}" style="{{ q.buttons.0.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">0</button>
-            <button onClick="{{ q.buttons.1.on }}" aria-pressed="{{ q.buttons.1.pressed }}" style="{{ q.buttons.1.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">1</button>
-            <button onClick="{{ q.buttons.2.on }}" aria-pressed="{{ q.buttons.2.pressed }}" style="{{ q.buttons.2.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">2</button>
-            <button onClick="{{ q.buttons.3.on }}" aria-pressed="{{ q.buttons.3.pressed }}" style="{{ q.buttons.3.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">3</button>
-            <button onClick="{{ q.buttons.4.on }}" aria-pressed="{{ q.buttons.4.pressed }}" style="{{ q.buttons.4.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">4</button>
-            <button onClick="{{ q.buttons.5.on }}" aria-pressed="{{ q.buttons.5.pressed }}" style="{{ q.buttons.5.style }}" style-hover="transform:scale(1.08); border-color:#7A5C44">5</button>
-          </div>
-        </div>
-      </sc-for>
-      <div style="display:flex; align-items:center; gap:12px; margin-top:22px; padding:14px 20px; background:#FBF8F2; border:1px solid rgba(122,92,68,0.2); border-radius:14px; justify-content:space-between">
-        <span style="font-family:'Raleway','Noto Sans',sans-serif; font-size:11.5px; letter-spacing:0.1em; color:#7B766B; font-weight:600; white-space:nowrap">KAPHA SCORE</span>
-        <div style="flex:1; height:5px; background:#E7DECB; border-radius:3px; overflow:hidden; margin:0 6px"><div style="{{ kaphaBarStyle }}"></div></div>
-        <span style="font-family:'Cormorant Garamond','Noto Serif',serif; font-size:26px; font-weight:500; letter-spacing:0.02em; color:#33523E">{{ kaphaTotal }}</span><span style="font-family:'Raleway','Noto Sans',sans-serif; font-size:13px; color:#7B766B">/ 100</span>
-      </div>
-    </section>
-
-    <section data-screen-label="Doṣa Quiz — Submit" style="text-align:center; margin-top:44px; padding-top:36px; border-top:1px solid rgba(122,92,68,0.2)">
-      <p style="margin:0 0 22px; font-family:'Cormorant Garamond','Noto Serif',serif; font-style:italic; font-size:17.5px; color:#59685D">When you have answered all 60 statements, reveal your constitution below.</p>
-      <div style="display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:12px">
-        <button onClick="{{ reveal }}" style="display:inline-flex; align-items:center; gap:10px; padding:16px 40px; background:#33523E; color:#F7F3EC; border:none; cursor:pointer; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; font-weight:600; letter-spacing:0.02em; border-radius:999px; box-shadow:0 18px 38px -18px rgba(51,82,62,0.6); transition:background 0.25s, transform 0.25s" style-hover="background:#2A4635; transform:translateY(-2px)">Reveal My Doṣa →</button>
-        <button onClick="{{ reset }}" style="display:inline-block; padding:12px 26px; background:transparent; color:#7B766B; border:1px solid rgba(122,92,68,0.25); cursor:pointer; font-family:'Raleway','Noto Sans',sans-serif; font-size:12.5px; font-weight:600; letter-spacing:0.04em; border-radius:999px; transition:all 0.2s ease" style-hover="border-color:#7A5C44; color:#474747">Reset</button>
-      </div>
-      <p style="margin:16px 0 0; font-family:'Cormorant Garamond','Noto Serif',serif; font-size:15.5px; color:#C0674B; font-style:italic; display:{{ noteDisplay }}">{{ noteText }}</p>
-    </section>
-
-    <sc-if value="{{ resultsVisible }}" hint-placeholder-val="{{ false }}">
-      <section data-screen-label="Doṣa Quiz — Results" ref="{{ panelRef }}" style="margin-top:44px; padding:clamp(26px, 4.5vw, 40px); background:rgba(247,243,236,0.9); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,0.5); border-radius:22px; box-shadow:0 40px 80px -44px rgba(42,58,46,0.5); animation:fadeUp 0.5s ease">
-        <p style="margin:0 0 4px; font-family:'Cormorant Garamond','Noto Serif',serif; font-size:26px; font-weight:500; color:#33523E">Your Āyurvedic Constitution</p>
-        <p style="margin:0 0 28px; font-family:'Raleway','Noto Sans',sans-serif; font-size:12px; letter-spacing:0.12em; color:#7B766B; font-weight:600">PRAKṚTI — YOUR LIFELONG CONSTITUTION</p>
-
-        <div style="display:flex; flex-direction:column; gap:16px; margin-bottom:30px">
-          <div style="display:flex; align-items:center; gap:14px">
-            <span style="flex:0 0 76px; font-family:'Cormorant Garamond','Noto Serif',serif; font-size:18px; letter-spacing:0.03em; color:#5F5473">Vāta</span>
-            <div style="flex:1; height:9px; background:#E7DECB; border-radius:5px; overflow:hidden"><div style="{{ resVataBarStyle }}"></div></div>
-            <span style="flex:0 0 46px; font-family:'Cormorant Garamond','Noto Serif',serif; font-size:18px; color:#59685D; text-align:right">{{ resV }}</span>
-          </div>
-          <div style="display:flex; align-items:center; gap:14px">
-            <span style="flex:0 0 76px; font-family:'Cormorant Garamond','Noto Serif',serif; font-size:18px; letter-spacing:0.03em; color:#C0674B">Pitta</span>
-            <div style="flex:1; height:9px; background:#E7DECB; border-radius:5px; overflow:hidden"><div style="{{ resPittaBarStyle }}"></div></div>
-            <span style="flex:0 0 46px; font-family:'Cormorant Garamond','Noto Serif',serif; font-size:18px; color:#59685D; text-align:right">{{ resP }}</span>
-          </div>
-          <div style="display:flex; align-items:center; gap:14px">
-            <span style="flex:0 0 76px; font-family:'Cormorant Garamond','Noto Serif',serif; font-size:18px; letter-spacing:0.03em; color:#33523E">Kapha</span>
-            <div style="flex:1; height:9px; background:#E7DECB; border-radius:5px; overflow:hidden"><div style="{{ resKaphaBarStyle }}"></div></div>
-            <span style="flex:0 0 46px; font-family:'Cormorant Garamond','Noto Serif',serif; font-size:18px; color:#59685D; text-align:right">{{ resK }}</span>
-          </div>
-        </div>
-
-        <div style="padding:22px 24px; border-left:3px solid #C0674B; background:#FBF8F2; border-radius:0 12px 12px 0; margin-bottom:26px">
-          <p style="margin:0 0 6px; font-family:'Raleway','Noto Sans',sans-serif; font-size:11px; letter-spacing:0.16em; color:#7B766B; font-weight:700">YOUR PRIMARY CONSTITUTION</p>
-          <p style="margin:0 0 8px; font-family:'Cormorant Garamond','Noto Serif',serif; font-size:27px; font-weight:500; color:{{ constitutionColor }}">{{ constitutionName }}</p>
-          <p style="margin:0; font-family:'Cormorant Garamond','Noto Serif',serif; font-style:italic; font-size:17.5px; line-height:1.6; color:#59685D">{{ constitutionShort }}</p>
-        </div>
-
-        <div style="margin:26px 0; padding:26px 24px; background:#FBF8F2; border:1px solid rgba(122,92,68,0.2); border-radius:16px">
-          <p style="margin:0 0 16px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; line-height:1.7; color:#474747; text-wrap:pretty">Your result above is your <em style="color:#7A5C44">Prakṛti</em> — your lifelong baseline. <em style="color:#7A5C44">Vikṛti</em> is how you feel <em>right now</em>, and the Doṣa that's currently stirred up isn't always your dominant one.</p>
-          <p style="margin:0 0 14px; font-family:'Cormorant Garamond','Noto Serif',serif; font-size:19px; color:#33523E; font-weight:500">Does any of this sound like you lately?</p>
-          <p style="margin:0 0 8px; font-family:'Raleway','Noto Sans',sans-serif; font-size:14.5px; line-height:1.6; color:#474747"><strong style="font-weight:700; color:#5F5473">Vāta</strong> — restless or broken sleep, dry skin, cold hands, a scattered or anxious mind, irregular digestion</p>
-          <p style="margin:0 0 8px; font-family:'Raleway','Noto Sans',sans-serif; font-size:14.5px; line-height:1.6; color:#474747"><strong style="font-weight:700; color:#C0674B">Pitta</strong> — running hot, impatient or overly critical, easily frustrated, perfectionistic, craving cool</p>
-          <p style="margin:0 0 8px; font-family:'Raleway','Noto Sans',sans-serif; font-size:14.5px; line-height:1.6; color:#474747"><strong style="font-weight:700; color:#33523E">Kapha</strong> — dull or heavy, low on motivation, oversleeping, sluggish, holding on to things and the past</p>
-          <p style="margin:16px 0 0; font-family:'Cormorant Garamond','Noto Serif',serif; font-style:italic; font-size:17px; line-height:1.6; color:#474747; text-wrap:pretty">Naming which Doṣa is stirred up right now — and knowing what to do about it — is what a Strategy Session is for.</p>
-        </div>
-
-        <div style="text-align:center; margin:28px 0 6px">
-          <p style="margin:0 auto 20px; max-width:52em; font-family:'Raleway','Noto Sans',sans-serif; font-size:14px; color:#59685D; line-height:1.7; text-wrap:pretty">In a Strategy Session, Dax works within Yoga Therapy — movement, breath, daily rhythm, and diet and lifestyle guidance suited to your constitution. If something falls outside that scope and calls for an Āyurvedic doctor's assessment or medicine, she'll tell you and point you toward the right care.</p>
-          <a href="https://nestymt.janeapp.com/#/staff_member/106/treatment/121" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:10px; padding:16px 40px; background:#33523E; color:#F7F3EC; text-decoration:none; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; font-weight:600; letter-spacing:0.02em; border-radius:999px; box-shadow:0 18px 38px -18px rgba(51,82,62,0.6); transition:background 0.25s, transform 0.25s" style-hover="background:#2A4635; transform:translateY(-2px); color:#F7F3EC">Book a Strategy Session →</a>
-        </div>
-
-        <p style="margin:26px 0 0; font-family:'Raleway','Noto Sans',sans-serif; font-size:13px; color:#7B766B; font-style:italic; border-top:1px solid rgba(122,92,68,0.2); padding-top:20px; line-height:1.7; text-wrap:pretty">Note: A simple questionnaire cannot fully capture the dynamism of the Doṣa-s. Most individuals have one primary Doṣa followed by a prominent secondary Doṣa. Single Doṣa dominance is rare, and tri-Doṣa balance is very rare. We recommend consulting a qualified Āyurvedic practitioner for a comprehensive assessment.</p>
-
-        <details class="full-desc" style="margin-top:24px; border-top:1px solid rgba(122,92,68,0.2); padding-top:8px">
-          <summary style="cursor:pointer; padding:14px 0; font-family:'Raleway','Noto Sans',sans-serif; font-size:13px; font-weight:700; letter-spacing:0.1em; color:#33523E; display:flex; align-items:center; gap:8px">READ YOUR FULL TYPE</summary>
-          <div style="padding:8px 2px 6px">
-            <div>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">The classical texts describe your constitution — your Prakṛti — in terms of three energies, or Doṣa-s: Vāta (V), Pitta (P), and Kapha (K). From these arise the constitutional types: three single-Doṣa types, the dual types, the tri-Doṣic VPK, and the near-perfectly Balanced.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">Most people are a blend. Pure single-Doṣa types are less common, and the two rarest types sit at opposite ends of the spectrum: the tri-Doṣic VPK, who carries all three energies in strength, and the Balanced individual, in whom the three sit in quiet equilibrium.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">A word on the dual types. When two Doṣa-s share the lead, the order matters: a constitution can lean in either direction depending on which Doṣa predominates. Vāta-Pitta and Pitta-Vāta are built from the same two energies, but the one named first sets the tone.</p>
-            </div>
-
-            <div style="display:{{ descV }}">
-              <h4 style="margin:20px 0 8px; font-family:'Cormorant Garamond','Noto Serif',serif; font-size:21px; font-weight:500; color:#33523E">Vāta (V)</h4>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">Your nature is movement, air, and change.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">You are likely thin, and you gain weight only with difficulty — except when you overeat with real determination, which you may do to steady yourself or to fuel the next burst of activity. Your frame tends to be narrow through the shoulders and hips, and your joints often crack when you move. You fidget; like a tendency toward heaviness in others, fidgeting tends to run in families.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">Above all, you are dry. Your skin chaps easily and is prone to corns and calluses; your hair tends to be coarse, dry, and curly. You struggle with cold and often complain of poor circulation in your hands and feet. Your skin is usually cool to the touch, you sweat little, and you love to be out in the sun.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">Your appetite is irregular, and your love of excitement pulls you into irregular eating that only worsens your digestion. Chronic constipation is a familiar companion, a product of your innate astringency. You love soupy, oily, hot foods, but you tend to go to extremes — either indulging in heavy, hard-to-digest dishes or denying yourself all richness at once.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">Your energy comes in spurts and bursts rather than a steady stream. Too often you prop it up with pungent stimulants like coffee rather than admit you are tired. You can sustain a pitch of frenzied activity for a while, but exhaustion always follows, and you may not notice it until sheer fatigue forces you to stop. Sleep can be elusive: you either struggle to fall or stay asleep, or you stay so exhausted that when you finally rest you sleep like the dead.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">You feel pain more keenly than other types, and loud noise wears on you — your nervous system seems to carry less insulation than it needs. That deep drive to avoid pain can surface as fear. This is why you adore oil massage: it soothes and quiets an overactive nervous system, easing both physical and mental tenderness. You live an erratic life because routine is genuinely hard for you to build, and your restless, bitter-tinged curiosity keeps you forever tinkering with yourself and your surroundings. If changeability defines most of what you do, you are Vāta-predominant.</p>
-            </div>
-
-            <div style="display:{{ descP }}">
-              <h4 style="margin:20px 0 8px; font-family:'Cormorant Garamond','Noto Serif',serif; font-size:21px; font-weight:500; color:#33523E">Pitta (P)</h4>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">Your nature is fire, heat, and sharp intensity.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">You run hot — intense, driven, and quick to irritation. You are usually medium in height, weight, and endurance. Your skin tends to be light and reddens fast in the sun, after exercise, or when you blush; you sunburn easily and often carry plenty of freckles and moles. Your hair is typically straight and light in colour. Anyone whose hair is naturally red is at least part Pitta.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">You sweat easily, because of all that heat stored inside. The sour and salty in your nature keep your appetite reliably strong, and you love to eat — food and drink take the edge off the fire. Miss a meal and you may "consume" some unlucky bystander with your stored anger instead. You enjoy nearly all foods and usually digest them well; you tend toward loose stools and are rarely constipated.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">That same fire sharpens your mind. You think quickly and grow impatient around people who are slower or less focused than you. You usually sleep well, because you regard sleep as sensible — but let yourself become obsessed with work and you'll spend the nights awake. You bring the same intensity and competitiveness to everything, work or play, and your pungent edge means you anger easily, even when you don't outwardly lose your temper.</p>
-            </div>
-
-            <div style="display:{{ descK }}">
-              <h4 style="margin:20px 0 8px; font-family:'Cormorant Garamond','Noto Serif',serif; font-size:21px; font-weight:500; color:#33523E">Kapha (K)</h4>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">Your nature is earth, water, and steady strength.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">You are likely a solid, heavyset build — a natural athlete when you exercise properly, and someone who seems to gain weight just by looking at food when you neglect it. You are healthy most of the time, especially when you don't overeat. You don't feel the fierce physical hunger that Vāta and Pitta types do, because sweetness runs strong in you by nature — but you can grow attached to food as a form of emotional comfort. You sleep soundly and tend to oversleep.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">You generally don't crave the excitement and stimulation that Vāta and Pitta chase, even where sex is concerned — though once you are drawn in, the sour and salty rise in you and your appetites wake up. You are stable, unhurried, and inclined to be content. That attachment to a comfortable status quo is your gift and your trap: it can make you averse to change, and at its worst it hardens into greed, stubbornness, or resistance to anything new. Where Vāta needs grounding and Pitta needs a challenge, you need motivation and stimulation to keep from settling too deep.</p>
-            </div>
-
-            <div style="display:{{ descVP }}">
-              <h4 style="margin:20px 0 8px; font-family:'Cormorant Garamond','Noto Serif',serif; font-size:21px; font-weight:500; color:#33523E">Vāta-Pitta (VP)</h4>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">You carry the lightness of air and the intensity of fire.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">You generally share Vāta's poor circulation and love of heat — but your Pitta side sets firm limits on how much heat you can actually endure. The Pitta in you loves to eat; the Vāta in you makes large meals hard to digest. Many of your traits are visible blends of the two: wavy hair, for instance, is Vāta's curl meeting Pitta's straightness.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">Often, though, the two don't blend so much as take turns. When you are out of balance, fear alternates with anger as your response to stress, and that swing can tip into bullying or domineering behaviour. The Pitta in you feels the need to command; the Vāta in you plants doubt about your fitness to command — and the uneasy compromise can become the domination of those weaker than yourself.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">At your best, you marry Vāta's capacity for original thought to Pitta's skill at putting theory to work. Lightness and intensity are the qualities V and P share, and your work is to harness that lightness for intensive self-development. Left unguided, it runs the other way: Vāta's pull toward numbing pain and Pitta's pull toward amplifying intensity can drag you into deeper patterns of addiction than either type knows alone.</p>
-            </div>
-
-            <div style="display:{{ descPV }}">
-              <h4 style="margin:20px 0 8px; font-family:'Cormorant Garamond','Noto Serif',serif; font-size:21px; font-weight:500; color:#33523E">Pitta-Vāta (PV)</h4>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">Fire leads in you, with the wind close behind.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">You share the same two energies as the Vāta-Pitta type, but the order is reversed: here Pitta sets the tone. You lead with heat, precision, and the drive to transform things, and Vāta's movement and creativity ride on top of that fire. Among the dual constitutions you are often the most dynamic and energetic — quick-minded, ambitious, and inventive — though you also overstimulate more easily than most, because the reactive nervous system of Vāta is wired to an engine that already runs hot.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">Physically you tend toward a medium or lean build, lighter than a pure Pitta, with muscle that is reasonably developed rather than heavy. Your body runs warm. Your skin is sensitive, warm, and on the thinner side, and it may alternate between oily and dry as the two Doṣa-s trade places. Your hair is often fine and may grey or thin earlier than most, and your eyes tend to be bright and penetrating, frequently sensitive to light. In temperature you lean cool — you dislike excessive heat, yet you can carry cold hands and feet (Vāta) over a core that still feels hot inside (Pitta) at the very same time.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">Yours is one of the most variable digestions of any constitution. Your appetite is strong and you grow irritable when meals are delayed, but your digestion fluctuates under stress, tipping toward acidity, bloating, and gas, and swinging between constipation and loose stools. Mentally you are formidable: intelligent, analytical, a fast learner, imaginative and articulate, an efficient and innovative problem-solver. That same wiring brings impatience, anxiety, perfectionism, overthinking, and a real difficulty switching off — your mind stays lit long after you'd like it to dim. Sleep is often light and easily interrupted, rich with vivid dreams, and hard to enter at all when your thoughts are still racing. You thrive on vigorous, challenging movement and on learning new skills, but overtraining, relentless competition, and chronic short sleep will cost you. When you fall out of balance, it tends to show as acid reflux, gastritis, headaches or migraines, insomnia, anxiety, burnout, inflammatory skin, and bowels that alternate between bound and loose.</p>
-            </div>
-
-            <div style="display:{{ descPK }}">
-              <h4 style="margin:20px 0 8px; font-family:'Cormorant Garamond','Noto Serif',serif; font-size:21px; font-weight:500; color:#33523E">Pitta-Kapha (PK)</h4>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">You combine the fire of Pitta with the ground of Kapha.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">You probably adjust to today's confusion, irregularity, and constant change better than any other constitution, because you pair Kapha's stability with Pitta's adaptability. Many people who achieve all-round success in life are PKs. Pitta's active metabolism balances Kapha's powerful physique to keep you physically healthy, and Pitta's anger is well tempered by Kapha's caution to keep you mentally steady. You prefer temperate climates but can easily handle extremes of heat or cold, and you enjoy — and benefit from — vigorous exercise, sex included.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">Your shadow rises from the oiliness and wetness that Pitta and Kapha share. The ease with which you succeed can feed Pitta's arrogance and overconfidence and Kapha's smug self-satisfaction, and together these can seal you off — completely and efficiently — from any reality other than the one you wish to see. This is where the oiliness shows: like water off a duck's back, criticism slides away unregarded while only flattery is let in. It can make a very successful PK very difficult to live with.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">Because Vāta is naturally minimized in you, you need what Vāta provides: the dryness of introspection or spiritual discipline, and the irregularity of unpredictable situations, to keep overconfidence in check.</p>
-            </div>
-
-            <div style="display:{{ descKP }}">
-              <h4 style="margin:20px 0 8px; font-family:'Cormorant Garamond','Noto Serif',serif; font-size:21px; font-weight:500; color:#33523E">Kapha-Pitta (KP)</h4>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">Ground leads in you, with fire held steadily within it.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">You share the same two energies as the Pitta-Kapha type, but here Kapha sets the tone. You lead with the stability, endurance, and nourishing solidity of earth and water, and Pitta's metabolic strength and intensity burn steadily inside that frame rather than running the show. This is often described as one of the strongest constitutions physically — you have the build to do real work and the fire to power it.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">You tend toward a medium-to-large frame with good muscle that you gain easily; you also gain fat more readily than a pure Pitta would. Your skin is thick and smooth, your hair lustrous, your stamina good. Your digestion is one of your quieter gifts: consistently strong, with a regular appetite and an efficient metabolism — though when you overreach it, you overeat, feel sluggish after meals, and can tip toward acid reflux and steady weight gain. You tolerate cold well, dislike humid heat, and generally feel warm overall. In mind you are practical, organized, methodical, and dependable, with an excellent memory and deep reserves of patience and determination.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">Emotionally you are steady in a way lighter types envy — loyal, compassionate, disciplined, and resilient, hard to knock off course. Your shadow is the flip side of that solidity: stubbornness, possessiveness, competitiveness, and a difficulty letting go. Your anger is not Pitta's quick flare but something slower — it builds beneath the surface and, once roused, burns long and hot. You sleep deeply and long, and you are difficult to wake. You have excellent tolerance for resistance training, endurance work, and sustained effort, and you genuinely need enough intensity in your life to keep Kapha from settling into stagnation. When you fall out of balance, it tends to show as weight gain, high cholesterol, inflammatory skin conditions or acne, a sluggish metabolism, congestion, and — on the emotional side — suppressed anger and an over-tight grip on the people and things you love.</p>
-            </div>
-
-            <div style="display:{{ descVK }}">
-              <h4 style="margin:20px 0 8px; font-family:'Cormorant Garamond','Noto Serif',serif; font-size:21px; font-weight:500; color:#33523E">Vāta-Kapha (VK)</h4>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">You are cold twice over — the air of Vāta meeting the water of Kapha.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">Vāta and Kapha are united in coldness. You don't suffer physical cold as sharply as a pure Vāta, because Kapha lends you strength and insulation — but you carry a double emotional need for warmth. You tend to be tall, yet average in build and in most other physical qualities, much as Pitta types are. Your lack of heat usually shows up as digestive trouble, especially constipation, and respiratory conditions with heavy mucus are common too.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">You are usually zealous about whatever you take on, and you often overdo it by forgetting to use discretion. You can be light, open, and airy by turns, then deep and secretive. Without a strong Pitta fire to integrate them, your two natures — diametrically opposed — are especially hard to reconcile, so you must be particularly wary of jumping to conclusions before you've properly investigated. And because Kapha's deep emotional nature is wedded to Vāta's up-and-down sensitivity, emotional hurt goes deep in you and stays deep.</p>
-            </div>
-
-            <div style="display:{{ descKV }}">
-              <h4 style="margin:20px 0 8px; font-family:'Cormorant Garamond','Noto Serif',serif; font-size:21px; font-weight:500; color:#33523E">Kapha-Vāta (KV)</h4>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">Ground leads in you, with the wind moving quietly underneath.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">You share the same two energies as the Vāta-Kapha type, but here Kapha sets the tone. Kapha gives you stability and structure; Vāta brings movement and variability beneath it. The result is a particular kind of person — calm and settled on the surface, while a good deal of mental activity runs on inside. To others you can look unhurried and unbothered; within, the wind is rarely still.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">You tend toward a medium-to-large frame with a body weight that varies, and you're prone to water retention. One of your quiet paradoxes is dry skin over a heavier build — Vāta's dryness inside Kapha's fullness. Your joints tend to be thick, your hands and feet cold, your movements on the slower side. Yours is usually the weakest digestion of the dual constitutions: your appetite is irregular, your digestion slow, and you're prone to bloating, gas, constipation, and a heaviness that lingers after eating. You dislike cold weather, prefer warmth, and chill easily. In mind you are thoughtful, creative, patient, and reflective — reliable and compassionate, with an excellent long-term memory.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">Emotionally you are nurturing, calm, loyal, and forgiving. Your challenges gather on the quieter end of the spectrum: worry, attachment, indecision, procrastination, a tendency to withdraw, and — when you're severely out of balance — a low, heavy mood that can be hard to shift, a fear of change married to a resistance to it. You sleep long, yet may still wake unrefreshed, and you lean toward oversleeping; when Vāta becomes aggravated, your dreams turn vivid. You do best with regular, warming movement and value consistency over intensity — too little activity lets Kapha stagnate, while too much irregular activity stirs Vāta up. When you fall out of balance, it tends to show as chronic constipation, edema, sinus congestion and seasonal allergies, fatigue and low mood, anxiety, stiffness in the joints and muscles, poor circulation, and weight gain that arrives despite an unreliable appetite.</p>
-            </div>
-
-            <div style="display:{{ descVPK }}">
-              <h4 style="margin:20px 0 8px; font-family:'Cormorant Garamond','Noto Serif',serif; font-size:21px; font-weight:500; color:#33523E">VPK — Tri-Doṣic (V-P-K)</h4>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">You carry all three energies in full strength.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">Yours is one of the two rarest results. All three Doṣa-s — the movement of Vāta, the fire of Pitta, and the ground of Kapha — are present in you in roughly equal force. In balance, this is a remarkable constitution: you can draw on Vāta's creativity, Pitta's drive, and Kapha's endurance in turn, and few types are as broadly capable or as physically resilient when well cared for.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">The difficulty is that balance is harder to hold and harder to recover. Where a single-Doṣa type has one tendency to manage, you have three, and when you slip, all three can go out of balance at once — the restlessness, the heat, and the heaviness arriving together rather than one at a time. This is why tri-Doṣic people who let all three energies fall out of order are rarely healthy without effort, and why a genuinely disciplined life — regular routine, attentive diet, steady self-observation — matters more for you than for almost anyone else. The reward for that discipline is unusual: kept in balance, you have range and stamina that narrower constitutions simply don't.</p>
-            </div>
-
-            <div style="display:{{ descBAL }}">
-              <h4 style="margin:20px 0 8px; font-family:'Cormorant Garamond','Noto Serif',serif; font-size:21px; font-weight:500; color:#33523E">Balanced</h4>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">Your three energies sit in quiet equilibrium.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">Yours is the other rare result — and, in a sense, the fortunate one. In you, Vāta, Pitta, and Kapha exist in near-equal, settled proportion. None dominates, none is starved, and the qualities that pull other people to extremes tend to cancel gently in you toward the middle. You are usually healthy, and you stay that way because it takes real, sustained stress before an imbalance can take hold at all.</p>
-              <p style="margin:0 0 14px; font-family:'Raleway','Noto Sans',sans-serif; font-size:15px; color:#474747; line-height:1.75; text-wrap:pretty">This does not make you invulnerable or exempt from care — it means your margin is wider. Where another type tips into imbalance from a poor week of sleep or a change of season, you can usually absorb the disturbance and return to centre on your own. The risk hidden in that resilience is complacency: because imbalance comes so rarely, it can be well established before you notice it, and because no single Doṣa announces itself loudly in you, the early signals are subtle. Your work is less about correcting a constant tendency and more about protecting a good thing — keeping the routines, diet, and rhythms that hold your equilibrium in place.</p>
-            </div>
-
-            <div style="display:{{ dualNoteDisplay }}; font-family:'Raleway','Noto Sans',sans-serif; font-size:13.5px; color:#7B766B; font-style:italic; line-height:1.7; margin-top:18px; padding-top:16px; border-top:1px dashed rgba(122,92,68,0.2); text-wrap:pretty">The dual-Doṣa portraits draw on classical Āyurvedic principles as set down in texts such as the Charaka Saṃhitā, Suśruta Saṃhitā, and Aṣṭāṅga Hṛdaya, alongside contemporary reviews and research into validated Prakṛti assessment tools. It's worth being straight about the evidence: modern research supports the reality of constitutional variation and has produced increasingly reliable ways to assess it, but the detailed personality and clinical profiles of the dual constitutions remain rooted primarily in classical doctrine rather than in large, independent clinical trials. Read these descriptions as a time-tested framework for understanding your tendencies — not as clinically validated fact about every trait.</div>
-
-            <div style="margin-top:30px; padding-top:16px; border-top:1px dashed rgba(122,92,68,0.2)">
-              <h4 style="margin:0 0 8px; font-family:'Cormorant Garamond','Noto Serif',serif; font-size:18.5px; font-weight:500; color:#33523E">A Note Before You Go</h4>
-              <p style="margin:0 0 12px; font-family:'Raleway','Noto Sans',sans-serif; font-size:13.5px; color:#7B766B; font-style:italic; line-height:1.7; text-wrap:pretty">Constitutional types are simple, but not simplistic. Every body and mind is unlike any other, and your type does not lock you into a stereotype — it gives you information about metabolic tendencies so deeply ingrained that they must be actively balanced if you are to stay in balance.</p>
-              <p style="margin:0 0 12px; font-family:'Raleway','Noto Sans',sans-serif; font-size:13.5px; color:#7B766B; font-style:italic; line-height:1.7; text-wrap:pretty">Your constitution does not change, but your perception of it may. Come back to this evaluation after some time and you may find your first reading was off — which is normal, because as we grow healthier our sense of reality grows clearer, and what once seemed impossible to grasp can suddenly become plain. Even if you've misjudged your type today, living for a while according to your current condition will be therapeutic.</p>
-              <p style="margin:0; font-family:'Raleway','Noto Sans',sans-serif; font-size:13.5px; color:#7B766B; font-style:italic; line-height:1.7; text-wrap:pretty">Think of your result as a foundation. If the foundation is good, what you build on it will be good; if it's imperfect, no amount of building can quite save the structure above it. This is the start of the road — the beginning of a longer, richer understanding of yourself.</p>
-            </div>
-          </div>
-        </details>
-      </section>
-    </sc-if>
-
+    </div>
   </div>
 
-  <dc-import name="SiteFooter" hint-size="100%,300px"></dc-import>
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      How is Yoga Therapy different from Yoga classes?
+      <span class="faq-icon" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" role="region">
+      <div class="faq-answer-inner">
+        <p>Yoga classes — even therapeutic ones — are designed for groups and cannot address your specific condition with the precision needed for lasting results.</p>
+        <p><strong>Yoga classes provide:</strong> General sequences, group instruction, standardized progressions.<br>
+        <strong>Yoga Therapy provides:</strong> Personalized assessment, custom protocols designed for your exact condition, progressive adaptation based on your response, root cause resolution, clinical outcome measurement.</p>
+        <p>Think of it this way: if you had a knee injury, would you join a generic group class or work one-on-one with a therapist who designs a custom rehabilitation plan just for you?</p>
+        <p>Yoga Therapy is clinical intervention, not general wellness. The results reflect that distinction.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      What are the benefits of Yoga Therapy?
+      <span class="faq-icon" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" role="region">
+      <div class="faq-answer-inner">
+        <p>Yoga Therapy works on multiple dimensions simultaneously — physical, physiological, and emotional. Regular therapeutic practice supports:</p>
+        <ul>
+          <li>Increased strength and flexibility</li>
+          <li>Reduction in pain and fatigue</li>
+          <li>Improved circulation and breath capacity</li>
+          <li>Decreased blood pressure and lowered risk of heart disease</li>
+          <li>Enhanced sleep quality and digestion</li>
+          <li>Improved mood and greater peace of mind</li>
+          <li>Reduced stress and anxiety</li>
+          <li>Increased self-discipline and resilience</li>
+        </ul>
+        <p>Whether you're seeking relief from a specific condition or looking to improve your overall quality of life, these benefits compound over time as your practice develops.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      Will this work for my specific condition?
+      <span class="faq-icon" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" role="region">
+      <div class="faq-answer-inner">
+        <p><strong>I work with:</strong></p>
+        <ul>
+          <li><strong>Chronic pain:</strong> Fibromyalgia, sciatica, arthritis, chronic back/neck pain, joint pain</li>
+          <li><strong>Post-injury recovery:</strong> Rotator cuff, knee injuries, hip dysfunction, post-surgical rehabilitation</li>
+          <li><strong>Women's health:</strong> Perimenopause/menopause symptoms, pelvic pain, endometriosis, hormonal imbalances</li>
+          <li><strong>Stress-related conditions:</strong> IBS, digestive disorders, insomnia, anxiety, PTSD</li>
+        </ul>
+        <p><strong>If you have:</strong></p>
+        <ul>
+          <li>Acute injuries requiring immediate medical intervention → See a physician first</li>
+          <li>Conditions requiring surgical intervention → We can work together post-surgery</li>
+          <li>Severe mental health conditions → Yoga Therapy is complementary, not primary treatment</li>
+        </ul>
+        <p>During your <a href="https://nestymt.janeapp.com/#/staff_member/106/treatment/121" target="_blank" rel="noopener">Discovery Call</a> or <a href="https://daxyogatherapy.com/#strategysessionapplicationform" target="_blank" rel="noopener">Strategy Session</a>, we'll discuss your specific situation and I'll tell you honestly whether yoga therapy is appropriate and what results you can realistically expect.</p>
+    </div>
+  </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      How can my training support your specific needs?
+      <span class="faq-icon" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" role="region">
+      <div class="faq-answer-inner">
+        <p>My training and education have equipped me to support a wide range of physical, emotional, and mental challenges. Whether you're dealing with chronic pain conditions like fibromyalgia, sciatica, or arthritis, or managing stress, anxiety, depression, or PTSD, I'm here to support you.</p>
+        <p><strong>I also provide personalized care for those experiencing:</strong></p>
+        <ul>
+          <li>Fatigue and sleep disturbances like insomnia</li>
+          <li>Hormonal shifts and life transitions, including menopause support</li>
+          <li>Digestive and metabolic concerns like IBS and thyroid imbalances</li>
+          <li>Reproductive health issues such as endometriosis</li>
+        </ul>
+        <p>My approach is integrative, considering your whole self — body, mind, and emotions. My goal is to create a safe and nurturing space where you can move toward better health through personalized Yoga Therapy in Toronto.</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     CATEGORY: RESULTS & PROCESS
+════════════════════════════════════════════ -->
+<section class="faq-group" id="faq-results">
+  <p class="faq-group-title">Results &amp; Process</p>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      How quickly will I see results?
+      <span class="faq-icon" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" role="region">
+      <div class="faq-answer-inner">
+        <p><em>Honest answer: it depends entirely on your condition, commitment, and individual response.</em></p>
+        <p>Some clients notice improvement within 2–3 weeks — better sleep, reduced anxiety, subtle shifts in pain patterns. Others take 6–8 weeks before seeing significant change, especially with complex chronic conditions.</p>
+        <p><strong>What affects your timeline:</strong></p>
+        <ul>
+          <li><strong>Condition complexity</strong> — Acute issues often respond faster than chronic, multi-layered dysfunction</li>
+          <li><strong>Home practice consistency</strong> — Daily practice produces different results than sporadic practice</li>
+          <li><strong>Your body's current capacity</strong> — Severely deconditioned bodies need more time to rebuild</li>
+          <li><strong>Lifestyle factors</strong> — Sleep quality, stress levels, and daily movement habits all impact healing</li>
+          <li><strong>Readiness for change</strong> — Sometimes people want to feel better but aren't ready to change habits contributing to the problem</li>
+        </ul>
+        <p><strong>What I can promise:</strong></p>
+        <ul>
+          <li>Clear communication about what I'm seeing and whether we're making progress</li>
+          <li>Honest assessment if your pace is slower than expected and why</li>
+          <li>Continuous refinement of your protocol based on your response</li>
+          <li>Recommendation to seek additional support if something outside my scope is blocking progress</li>
+        </ul>
+        <p><strong>What I cannot promise:</strong> specific timelines or percentage improvements; that you'll be pain-free (some conditions require management, not elimination); or that Yoga Therapy alone will solve complex, multi-factorial health issues.</p>
+        <p>The goal is continuous progress toward your objectives — not meeting arbitrary timelines.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      What if I've tried yoga before and it didn't help?
+      <span class="faq-icon" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" role="region">
+      <div class="faq-answer-inner">
+        <p>Generic yoga classes aren't designed to address clinical conditions. If you've tried yoga and didn't experience meaningful improvement, it likely means:</p>
+        <ol>
+          <li><strong>The practice wasn't personalized to your condition</strong> — Group classes can't address your specific dysfunction</li>
+          <li><strong>You were given sequences that aggravated your condition</strong> — Not all yoga poses are appropriate for all conditions</li>
+          <li><strong>There was no progressive therapeutic protocol</strong> — Random classes don't build systematically toward healing</li>
+          <li><strong>Root causes weren't addressed</strong> — Stretching tight muscles doesn't resolve why they're tight in the first place</li>
+        </ol>
+        <p>Yoga Therapy is fundamentally different. We identify exactly what's creating your pain and design practices that resolve it systematically. If your previous yoga experience didn't work, that's precisely why you need specialized yoga therapy.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      Do I need to be flexible or have yoga experience?
+      <span class="faq-icon" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" role="region">
+      <div class="faq-answer-inner">
+        <p>Absolutely not. In fact, many of my most successful clients had never done yoga before starting therapy.</p>
+        <p><strong>Yoga Therapy meets you exactly where you are.</strong> If you can't touch your toes, can barely get on the floor, or have significant movement limitations — that's precisely why personalized therapy is necessary.</p>
+        <p>I design practices around your current capacity and we progress gradually. You'll never be asked to do something your body isn't ready for.</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     CATEGORY: INVESTMENT
+════════════════════════════════════════════ -->
+<section class="faq-group" id="faq-investment">
+  <p class="faq-group-title">Investment</p>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      How much does it cost?
+      <span class="faq-icon" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" role="region">
+      <div class="faq-answer-inner">
+        <p><strong>Initial Assessment:</strong> $130 (90 minutes)<br>
+        Comprehensive evaluation and personalized treatment planning.</p>
+        <p><strong>Individual Sessions:</strong> $110 (60 minutes)<br>
+        Ongoing therapeutic sessions with protocol refinement.</p>
+        <p><strong>Foundations Program:</strong> $330 (3 sessions)<br>
+        Assessment + 2 follow-up sessions. Good for acute issues or trying yoga therapy before a longer commitment. New clients only.</p>
+        <p>I'll give you an honest recommendation after your initial assessment about what I believe your situation requires. You're never locked into a package — we work session by session, and you decide when you've achieved your goals or are ready to practice independently.</p>
+        <p><strong>Group Classes:</strong> Vary by studio pricing at Nest Yoga + Massage.</p>
+        <p>Many clients spend thousands annually on pain medication, massage, physiotherapy, and other interventions that provide temporary relief. Therapeutic yoga addresses root causes — meaning you invest for a defined period to develop sustainable tools, rather than depending on external interventions indefinitely.</p>
+        <p>That said, this is still a real financial commitment. If cost is a significant barrier, the <a href="https://daxyogatherapy.com/#foundationsprogram" target="_blank" rel="noopener">Foundations Program</a> or <a href="https://nestymt.janeapp.com/#/staff_member/106" target="_blank" rel="noopener">group classes</a> may be a more accessible starting point.</p>
+      </div>
+    </div>
+  </div>    
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      Is Yoga Therapy covered by insurance?
+      <span class="faq-icon" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" role="region">
+      <div class="faq-answer-inner">
+        <p>Many extended health insurance plans in Canada cover Yoga Therapy under complementary or alternative medicine.</p>
+        <p><strong>Check your policy for:</strong></p>
+        <ul>
+          <li>Complementary medicine coverage</li>
+          <li>Specific "yoga therapy" or "therapeutic yoga" listings</li>
+          <li>Annual limits for alternative health practitioners</li>
+        </ul>
+        <p><strong>Important note:</strong> Coverage varies widely by insurer and province. Plans offered through employers or unions may differ significantly from individual plans. Always confirm with your insurer directly.</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     CATEGORY: ĀYURVEDA
+════════════════════════════════════════════ -->
+<section class="faq-group" id="faq-ayurveda">
+  <p class="faq-group-title">Āyurveda</p>
+
+  <div class="faq-item">
+  <button class="faq-question" aria-expanded="false">
+    What is Āyurveda?
+    <span class="faq-icon" aria-hidden="true"></span>
+  </button>
+  <div class="faq-answer" role="region">
+    <div class="faq-answer-inner">
+      <p>Āyurveda is an ancient holistic healing system that originated in India over 5,000 years ago. The word Āyurveda comes from Sanskrit: "Āyur" meaning life, and "Veda" meaning knowledge — translating to "the science of life." This time-tested system views health as a balance between body, mind, and spirit, recognizing that each person requires individualized care based on their unique constitution (Doṣa), lifestyle, and environment.</p>
+    </div>
+  </div>
 </div>
-</x-dc>
-<script type="text/x-dc" data-dc-script>
-class Component extends DCLogic {
-  state = { answers: {}, results: null, barsIn: false, note: '' };
 
-  constructor(props) {
-    super(props);
-    this.panelRef = React.createRef();
+<div class="faq-item">
+  <button class="faq-question" aria-expanded="false">
+    What are the Doṣa?
+    <span class="faq-icon" aria-hidden="true"></span>
+  </button>
+  <div class="faq-answer" role="region">
+    <div class="faq-answer-inner">
+      <p>Āyurveda identifies three fundamental energies called Doṣa that govern bodily functions:</p>
+      <ul>
+        <li><strong>Vāta Doṣa</strong> (Air and Space): governs movement, circulation, and breathing</li>
+        <li><strong>Pitta Doṣa</strong> (Fire and Water): governs digestion, metabolism, and transformation</li>
+        <li><strong>Kapha Doṣa</strong> (Earth and Water): governs structure, stability, and lubrication</li>
+      </ul>
+      <p>Each person has a unique combination of these Doṣa. When they fall out of balance, health challenges can arise. To discover your own Doṣa (Prakṛti — your innate constitution, or Vikṛti — your current imbalance), you can take a short quiz <a href="https://dakusuyoga.github.io/dosha-quiz" target="_blank" rel="noopener">here</a>.</p>
+    </div>
+  </div>
+</div>
 
-    this.QUESTIONS = {
-      vata: {
-        physical: [
-          `I am slender and don't gain weight easily.`,
-          `I am taller or shorter than average.`,
-          `"Thin" describes many of my bodily features (such as my hair, neck, fingers, and lips).`,
-          `My energy fluctuates and often comes in bursts.`,
-          `My appetite is variable (e.g., high one day and low the next).`,
-          `I have a tendency to become bloated, gassy, or constipated.`,
-          `My skin frequently becomes dry.`,
-          `I tend to have cold hands and feet.`,
-          `I am a light sleeper and often have difficulty falling asleep.`,
-          `I prefer warm, moist weather to cold or dry weather.`
-        ],
-        psych: [
-          `I am creative and imaginative.`,
-          `I enjoy artistic forms of expression.`,
-          `My mind is active and often restless.`,
-          `I learn quickly but also forget quickly.`,
-          `I become "spaced out" quite easily.`,
-          `I have a tendency to feel anxious, insecure, and nervous.`,
-          `I speak quietly and use hand gestures.`,
-          `I am always on the go.`,
-          `My lifestyle and daily routine are irregular.`,
-          `My dreams are active and colourful.`
-        ]
-      },
-      pitta: {
-        physical: [
-          `I have a medium build and gain or lose weight easily.`,
-          `My height is average.`,
-          `My physical features are sharp or pointed (such as nose, chin, and teeth).`,
-          `My energy and activity levels are high.`,
-          `My appetite is strong; I can eat large quantities of food.`,
-          `My bowel movements are regular; I occasionally have diarrhea.`,
-          `I perspire quite easily.`,
-          `My skin is oily and has a reddish tone.`,
-          `My eyes are penetrating and light in colour.`,
-          `I prefer cooler weather and become irritable in hot weather.`
-        ],
-        psych: [
-          `I am goal-oriented and can achieve anything to which I put my mind.`,
-          `I have a good sense of humour.`,
-          `I have a strong intellect and enjoy learning new things.`,
-          `I have a natural ability to lead others.`,
-          `I am a perfectionist.`,
-          `I tend to become irritable, impatient, and angry.`,
-          `I am critical of myself and others.`,
-          `Many people think I'm stubborn.`,
-          `I become irritable if I skip a meal.`,
-          `I enjoy competition.`
-        ]
-      },
-      kapha: {
-        physical: [
-          `I gain weight easily and lose weight with great difficulty.`,
-          `I am short and stocky, or tall and sturdy.`,
-          `"Thick" describes many of my bodily features (such as my hair, neck, fingers, and lips).`,
-          `I have abundant strength and stamina.`,
-          `My digestion is slow and I often feel heavy after eating.`,
-          `My bowel movements are highly regular.`,
-          `My skin is smooth and oily and tends to be pale.`,
-          `I sleep deeply and soundly.`,
-          `I catch colds quite frequently.`,
-          `I prefer hot weather over cold or damp weather.`
-        ],
-        psych: [
-          `I have a big heart and prefer to focus on the good in the world.`,
-          `I am calm in nature and not easily angered.`,
-          `I prefer a slow, relaxed lifestyle.`,
-          `I don't learn as quickly as others, but my long-term memory is excellent.`,
-          `I become sentimental quite easily; I often think about the past.`,
-          `I am methodical in my actions.`,
-          `I am highly protective of myself and my family.`,
-          `I let negative emotions build up rather than addressing them.`,
-          `I usually let others take the lead.`,
-          `I am a natural listener and frequently help others with their problems.`
-        ]
-      }
-    };
+<div class="faq-item">
+  <button class="faq-question" aria-expanded="false">
+    How does Āyurveda support wellness?
+    <span class="faq-icon" aria-hidden="true"></span>
+  </button>
+  <div class="faq-answer" role="region">
+    <div class="faq-answer-inner">
+      <p>Āyurveda offers various tools and approaches to restore balance and support health:</p>
+      <ul>
+        <li>Diet and nutrition tailored to your constitution</li>
+        <li>Herbal remedies and natural treatments</li>
+        <li>Lifestyle practices and daily routines</li>
+        <li>Yoga and breathing exercises (Prāṇāyāma)</li>
+        <li>Meditation and mindfulness</li>
+        <li>Therapeutic bodywork</li>
+      </ul>
+      <p>In my Yoga Therapy practice in Toronto, I draw on Āyurvedic principles when appropriate, offering lifestyle and dietary recommendations to support your healing journey and help you achieve lasting wellness.</p>
+      <p>Āyurveda is known as the "sister science" to Yoga — they developed together in ancient India and complement each other beautifully. While Yoga focuses on spiritual growth and mental practices, Āyurveda addresses physical health and lifestyle. Together, they form a comprehensive system for holistic well-being. Want to learn more?Read my in-depth blog posts about <a href="https://chipper-composer-7760.kit.com/profile/posts" target="_blank" rel="noopener">Āyurveda and its role in healing</a> to explore how this ancient wisdom can support your wellness journey.</p>
+    </div>
+  </div>
+</div>
 
-    this.TYPES = {
-      V:   { name: 'Vāta (V)',        colour: '#5F5473', kind: 'single', short: `At your best: imaginative, adaptable, quick-minded, and full of creative energy.` },
-      P:   { name: 'Pitta (P)',       colour: '#C0674B', kind: 'single', short: `At your best: focused, courageous, warm, and sharp — someone who thrives on a challenge.` },
-      K:   { name: 'Kapha (K)',       colour: '#33523E', kind: 'single', short: `At your best: calm, steady, compassionate, and deeply reliable, with stamina others envy.` },
-      VP:  { name: 'Vāta-Pitta (VP)', colour: '#5F5473', kind: 'dual',   short: `At your best: inventive and driven — original ideas (Vāta) put to work with focus and fire (Pitta).` },
-      PV:  { name: 'Pitta-Vāta (PV)', colour: '#C0674B', kind: 'dual',   short: `At your best: dynamic and decisive — Pitta's fire quickened by Vāta's inventive movement.` },
-      PK:  { name: 'Pitta-Kapha (PK)', colour: '#C0674B', kind: 'dual',  short: `At your best: capable and grounded — Pitta's drive carried on Kapha's stamina and calm.` },
-      KP:  { name: 'Kapha-Pitta (KP)', colour: '#33523E', kind: 'dual',  short: `At your best: one of the strongest builds — Kapha's endurance powered by steady Pitta fire.` },
-      VK:  { name: 'Vāta-Kapha (VK)', colour: '#5F5473', kind: 'dual',   short: `At your best: imaginative and steadfast — Vāta's creativity anchored by Kapha's patience.` },
-      KV:  { name: 'Kapha-Vāta (KV)', colour: '#33523E', kind: 'dual',   short: `At your best: calm on the surface and quietly creative beneath — steady, thoughtful, and kind.` },
-      VPK: { name: 'VPK — Tri-Doṣic', colour: '#7A5C44', kind: 'even',   short: `At your best: rare range — creativity, drive, and endurance all on tap when you keep them balanced.` },
-      BAL: { name: 'Balanced',        colour: '#7A5C44', kind: 'even',   short: `At your best: rare equilibrium — steady, resilient, and hard to knock off centre.` }
-    };
+</section>
 
-    this.DOSHA_COLORS = { vata: '#5F5473', pitta: '#C0674B', kapha: '#33523E' };
-    this.BTN_BASE = "width:36px;height:36px;border-radius:50%;border:1px solid rgba(122,92,68,0.25);cursor:pointer;font-family:'Raleway','Noto Sans',sans-serif;font-size:13px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;padding:0;transition:all 0.16s ease;";
-  }
+  <!-- ════════════════════════════════════════════
+     CATEGORY: YOGA CLASSES
+════════════════════════════════════════════ -->
+<section class="faq-group" id="faq-classes">
+  <p class="faq-group-title">Yoga Classes</p>
 
-  total(dosha) {
-    const answers = this.state.answers;
-    let sum = 0;
-    for (const key in answers) {
-      if (key.indexOf(dosha + '_') === 0) sum += answers[key];
-    }
-    return sum;
-  }
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      What types of classes do you offer?
+      <span class="faq-icon" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" role="region">
+      <div class="faq-answer-inner">
+        <p>I teach four styles of small group yoga classes — Haṭha, Slow Flow, Yin, and Restorative — held at Nest Yoga + Massage in Bloor West Village in Toronto, with a maximum of four students per class. Each style has a different emphasis, but all are taught with the same attention to individual needs and therapeutic principles that inform my one-on-one work. Classes are designed as a complement to Yoga Therapy for existing clients, or as a gentle entry point into my teaching for those not yet ready for individual sessions.</p>
+      </div>
+    </div>
+  </div>
 
-  // ── 11-type classifier on RAW scores (each Doṣa 0–100) ──
-  // Single: top − second ≥ 20.  Even: top − bottom ≤ 10 (avg ≥ 60 → VPK, else Balanced).
-  // Else Dual, named lead→second in score order. Tie-break: V > P > K.
-  determineConstitution(v, p, k) {
-    if (v + p + k === 0) return null;
-    const priority = { V: 0, P: 1, K: 2 };
-    const ranked = [{ d: 'V', s: v }, { d: 'P', s: p }, { d: 'K', s: k }]
-      .sort((a, b) => (b.s - a.s) || (priority[a.d] - priority[b.d]));
-    const a = ranked[0], b = ranked[1], c = ranked[2];
-    if (a.s - b.s >= 20) return a.d;              // single
-    if (a.s - c.s <= 10) {                         // even
-      const avg = (a.s + b.s + c.s) / 3;
-      return avg >= 60 ? 'VPK' : 'BAL';
-    }
-    return a.d + b.d;                              // dual, ordered
-  }
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      Which class is right for me?
+      <span class="faq-icon" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" role="region">
+      <div class="faq-answer-inner">
+        <p>If you're looking to build strength and body awareness, <strong>Haṭha</strong> is a good starting point. If you want mindful movement with a focus on stress relief and mobility, <strong>Slow Flow</strong> is well suited. If you're drawn to stillness, deep tissue release, or a more meditative practice, <strong>Yin</strong> is worth exploring. And if your nervous system needs genuine rest — whether you're recovering, burned out, or simply depleted — <strong>Restorative</strong> is the most supported and passive of the four.</p>
+        <p>When in doubt, Restorative is rarely the wrong choice. If you're unsure, feel free to reach out before booking.</p>
+        <p><a href="https://daxyogatherapy.com/#schedule" target="_blank" rel="noopener">View the class schedule →</a></p>
+      </div>
+    </div>
+  </div>
 
-  rows(dosha, section) {
-    const color = this.DOSHA_COLORS[dosha];
-    const answers = this.state.answers;
-    return this.QUESTIONS[dosha][section].map((text, i) => {
-      const key = dosha + '_' + section + '_' + i;
-      const cur = answers[key];
-      return {
-        num: String(i + 1).padStart(2, '0'),
-        text: text,
-        buttons: [0, 1, 2, 3, 4, 5].map(v => ({
-          pressed: cur === v,
-          on: () => this.setState(s => ({ answers: { ...s.answers, [key]: v } })),
-          style: this.BTN_BASE + (cur === v
-            ? 'background:' + color + ';border-color:' + color + ';color:#FFFFFF'
-            : 'background:#FBF8F2;color:#7B766B')
-        }))
-      };
-    });
-  }
+</section>
 
-  barStyle(color, widthPct, heightPx, radius, transition) {
-    return 'height:' + heightPx + 'px;border-radius:' + radius + 'px;background:' + color + ';transition:' + transition + ';width:' + widthPct + '%';
-  }
+<!-- ════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════ -->
+<script>
+  // ── Accordion logic ──
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+      const answer = btn.nextElementSibling;
 
-  reveal = () => {
-    const v = this.total('vata'), p = this.total('pitta'), k = this.total('kapha');
-    const answered = Object.keys(this.state.answers).length;
-
-    if (v + p + k === 0) {
-      this.setState({ note: 'Please rate at least a few statements before revealing your Doṣa.' });
-      return;
-    }
-    const note = answered < 60
-      ? `You've answered ${answered} of 60. For an accurate reading, try to rate them all — your result will update as you do.`
-      : '';
-
-    const code = this.determineConstitution(v, p, k);
-    this.setState({ results: { v: v, p: p, k: k, code: code }, barsIn: false, note: note }, () => {
-      setTimeout(() => this.setState({ barsIn: true }), 80);
-      setTimeout(() => {
-        const el = this.panelRef.current;
-        if (el) {
-          const y = el.getBoundingClientRect().top + window.pageYOffset - 88;
-          window.scrollTo({ top: y, behavior: 'smooth' });
+      // Close all others
+      document.querySelectorAll('.faq-question[aria-expanded="true"]').forEach(other => {
+        if (other !== btn) {
+          other.setAttribute('aria-expanded', 'false');
+          other.nextElementSibling.style.maxHeight = null;
         }
-      }, 140);
+      });
+
+      // Toggle this one
+      if (isOpen) {
+        btn.setAttribute('aria-expanded', 'false');
+        answer.style.maxHeight = null;
+      } else {
+        btn.setAttribute('aria-expanded', 'true');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
     });
-  };
+  });
 
-  reset = () => {
-    this.setState({ answers: {}, results: null, barsIn: false, note: '' });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  renderVals() {
-    const answered = Object.keys(this.state.answers).length;
-    const pct = Math.min(100, (answered / 60) * 100);
-    const vT = this.total('vata'), pT = this.total('pitta'), kT = this.total('kapha');
-    const r = this.state.results;
-    const t = r ? this.TYPES[r.code] : null;
-    const barsIn = this.state.barsIn;
-    const show = (c) => (r && r.code === c) ? 'block' : 'none';
-
-    return {
-      vataPhysical: this.rows('vata', 'physical'),
-      vataPsych: this.rows('vata', 'psych'),
-      pittaPhysical: this.rows('pitta', 'physical'),
-      pittaPsych: this.rows('pitta', 'psych'),
-      kaphaPhysical: this.rows('kapha', 'physical'),
-      kaphaPsych: this.rows('kapha', 'psych'),
-
-      progressFillStyle: 'height:100%;border-radius:2px;background:linear-gradient(90deg,#5F5473,#C0674B,#33523E);transition:width 0.3s ease;width:' + pct + '%',
-      progressCount: answered + ' / 60',
-
-      vataTotal: vT, pittaTotal: pT, kaphaTotal: kT,
-      vataBarStyle: this.barStyle('#5F5473', Math.max(0, Math.min(100, vT)), 5, 3, 'width 0.35s ease'),
-      pittaBarStyle: this.barStyle('#C0674B', Math.max(0, Math.min(100, pT)), 5, 3, 'width 0.35s ease'),
-      kaphaBarStyle: this.barStyle('#33523E', Math.max(0, Math.min(100, kT)), 5, 3, 'width 0.35s ease'),
-
-      reveal: this.reveal,
-      reset: this.reset,
-      noteText: this.state.note,
-      noteDisplay: this.state.note ? 'block' : 'none',
-
-      resultsVisible: !!r,
-      panelRef: this.panelRef,
-      resV: r ? r.v : 0,
-      resP: r ? r.p : 0,
-      resK: r ? r.k : 0,
-      resVataBarStyle: this.barStyle('#5F5473', (r && barsIn) ? Math.min(100, r.v) : 0, 9, 5, 'width 0.8s cubic-bezier(0.22,1,0.36,1)'),
-      resPittaBarStyle: this.barStyle('#C0674B', (r && barsIn) ? Math.min(100, r.p) : 0, 9, 5, 'width 0.8s cubic-bezier(0.22,1,0.36,1)'),
-      resKaphaBarStyle: this.barStyle('#33523E', (r && barsIn) ? Math.min(100, r.k) : 0, 9, 5, 'width 0.8s cubic-bezier(0.22,1,0.36,1)'),
-
-      constitutionName: t ? t.name : '—',
-      constitutionColor: t ? t.colour : '#33523E',
-      constitutionShort: t ? t.short : '',
-
-      descV: show('V'), descP: show('P'), descK: show('K'),
-      descVP: show('VP'), descPV: show('PV'), descPK: show('PK'),
-      descKP: show('KP'), descVK: show('VK'), descKV: show('KV'),
-      descVPK: show('VPK'), descBAL: show('BAL'),
-      dualNoteDisplay: (t && t.kind === 'dual') ? 'block' : 'none'
-    };
+  // ── Notify parent of height for iframe resizing ──
+  function postHeight() {
+    window.parent.postMessage({ iframeHeight: document.body.scrollHeight }, '*');
   }
-}
+  const ro = new ResizeObserver(postHeight);
+  ro.observe(document.body);
+  postHeight();
 </script>
+
 </body>
 </html>
